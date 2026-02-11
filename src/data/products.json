@@ -17,7 +17,8 @@
         "quantity": "2000+ rounds",
         "pricePerRound": "0.338€",
         "total": "674.65€",
-        "status": "Available"
+        "status": "Available",
+        "nonToxic": true
       },
       {
         "url": "https://www.aawee.fi/fi/patruunat-ja-jalleenlataus/9x19-scorpio-124gr-8g-fmj-pistoolinpatruuna-stv-scorpio-patruuna-50kpl-rasia-1000kpl-laatikko/p/V00015-50/",
@@ -28,7 +29,8 @@
         "quantity": "6000+ rounds",
         "pricePerRound": "0.338€",
         "total": "2 024.62€",
-        "status": "Available"
+        "status": "Available",
+        "nonToxic": true
       },
       {
         "url": "https://www.asepajamvuorela.fi/kauppa/patruunat/pistoolin-patruunat/geco-9mm-luger-geco-fmj-8-g-tomback-jacket-50-kpl/",
@@ -72,7 +74,8 @@
         "quantity": "1000+ rounds",
         "pricePerRound": "0.338€",
         "total": "338.00€",
-        "status": "Available"
+        "status": "Available",
+        "nonToxic": true
       },
       {
         "url": "https://www.greentrail.fi/aseet-ja-patruunat/geco-9mm-luger-8g-fmj-50-ptr-ltk-pistoolinpatruuna/p/4000294186295/",
@@ -126,8 +129,8 @@
         "brand": "Sellier & Bellot",
         "quantity": "1000+ rounds",
         "pricePerRound": "0.320€",
-        "total": "319.48€",
-        "status": "Available"
+        "total": "319.16€",
+        "status": "Out of Stock"
       },
       {
         "url": "https://www.ruoto.fi/metsastys/geco-fmj-9mm-luger-8-0g-pistoolinpatruuna-9mm-luger-50kpl/p/4000294186295/",
@@ -137,7 +140,7 @@
         "brand": "Geco",
         "quantity": "1000+ rounds",
         "pricePerRound": "0.340€",
-        "total": "339.46€",
+        "total": "339.12€",
         "status": "Available"
       },
       {
@@ -204,7 +207,7 @@
         "quantity": "50+ rounds",
         "pricePerRound": "0.320€",
         "total": "15.99€",
-        "status": "Available"
+        "status": "Out of Stock"
       },
       {
         "url": "https://www.ruoto.fi/metsastys/sb-9mm-luger-fmj-8-0g-pistoolin-patruuna-9mm-luger-50kpl/p/8590690315208/8590690315208/",
@@ -248,7 +251,8 @@
         "quantity": "50+ rounds",
         "pricePerRound": "0.338€",
         "total": "16.90€",
-        "status": "Available"
+        "status": "Available",
+        "nonToxic": true
       },
       {
         "url": "https://www.greentrail.fi/aseet-ja-patruunat/geco-9mm-luger-8g-fmj-50-ptr-ltk-pistoolinpatruuna/p/4000294186295/",
@@ -293,6 +297,18 @@
         "pricePerRound": "0.360€",
         "total": "18.00€",
         "status": "Available"
+      },
+      {
+        "url": "https://viranomainen.fi/p140970/sellier-bellot-9mm-luger-tfmj-8-0g-nontox-50kpl",
+        "retailer": "Viranomainen",
+        "productName": "Sellier & Bellot\n9mm Luger TFMJ 8,0g NonTox 50kpl",
+        "productDetails": "",
+        "brand": "Sellier & Bellot",
+        "quantity": "50",
+        "pricePerRound": "0.390€",
+        "total": "19.50€",
+        "status": "Available",
+        "nonToxic": true
       }
     ],
     "22 LR": [
@@ -581,6 +597,18 @@
         "pricePerRound": "0.158€",
         "total": "7.90€",
         "status": "Available"
+      },
+      {
+        "url": "https://www.aawee.fi/fi/patruunat-ja-jalleenlataus/22lr-norma-eco-speed-22-50-ptr-lyijyton-pienoiskivaarinpatruuna/p/2414038/",
+        "retailer": "Aawee",
+        "productName": "22LR Norma Eco Speed-22 50 ptr",
+        "productDetails": "",
+        "brand": "Norma",
+        "quantity": "50",
+        "pricePerRound": "0.150€",
+        "total": "7.50€",
+        "status": "Out of Stock",
+        "nonToxic": true
       }
     ],
     "223 Remington": [
@@ -604,7 +632,8 @@
         "quantity": "6000+ rounds",
         "pricePerRound": "0.620€",
         "total": "3 716.28€",
-        "status": "Available"
+        "status": "Available",
+        "nonToxic": true
       },
       {
         "url": "https://www.aawee.fi/fi/patruunat-ja-jalleenlataus/223-rem-scorpio-55gr-3-6g-fmj-kivaarinpatruuna-stv-patruuna-20-kpl-rasiat-1000kpl-laatikot/p/V00044-20/",
@@ -615,7 +644,8 @@
         "quantity": "2000+ rounds",
         "pricePerRound": "0.620€",
         "total": "1 238.76€",
-        "status": "Available"
+        "status": "Available",
+        "nonToxic": true
       },
       {
         "url": "https://www.ruoto.fi/metsastys/winchester-fmj-223-rem-3-6g-kivaarin-ratapatruuna-223-rem/p/020892213111/",
@@ -625,7 +655,7 @@
         "brand": "Winchester",
         "quantity": "1000+ rounds",
         "pricePerRound": "0.849€",
-        "total": "850.35€",
+        "total": "851.20€",
         "status": "Available"
       },
       {
@@ -648,7 +678,8 @@
         "quantity": "1000+ rounds",
         "pricePerRound": "0.620€",
         "total": "620.00€",
-        "status": "Available"
+        "status": "Available",
+        "nonToxic": true
       },
       {
         "url": "https://www.greentrail.fi/aseet-ja-patruunat/fiocchi-fmj-223rem-3-6g-55gr-50kpl/p/762344020273/",
@@ -791,7 +822,8 @@
         "quantity": "20+ rounds",
         "pricePerRound": "0.620€",
         "total": "12.40€",
-        "status": "Available"
+        "status": "Available",
+        "nonToxic": true
       },
       {
         "url": "https://www.ironpoint.fi/shop/product/pmc-223-rem-fmj-bt-55gr-1000kpl?tm=&sm=patruunat/kivaari",
@@ -913,6 +945,90 @@
         "pricePerRound": "0.849€",
         "total": "16.99€",
         "status": "Available"
+      },
+      {
+        "url": "https://www.aawee.fi/fi/patruunat-ja-jalleenlataus/223-rem-lapua-naturalis-50gr-20kpl-n566-kivaarinpatruuna-20kpl/p/N315026/",
+        "retailer": "Aawee",
+        "productName": "223 Rem Lapua Naturalis 50gr 20kpl",
+        "productDetails": "",
+        "brand": "Lapua",
+        "quantity": "20",
+        "pricePerRound": "3.545€",
+        "total": "70.90€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.aawee.fi/fi/patruunat-ja-jalleenlataus/223-rem-barnes-55gr-tsx-fb-20-kpl-barnes-223-tsx-fb-patruuna/p/124010/",
+        "retailer": "Aawee",
+        "productName": "223 Rem BARNES 55gr TSX FB 20 kpl",
+        "productDetails": "",
+        "brand": "Barnes",
+        "quantity": "20",
+        "pricePerRound": "2.950€",
+        "total": "59.00€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.motonet.fi/tuote/sako-powerhead-blade-223-rem-35655-tec-648g-20-kpl?product=55-24503",
+        "retailer": "Motonet",
+        "productName": "Sako Powerhead Blade .223 Rem 3.56/55 TEC 648G 20 kpl",
+        "productDetails": "",
+        "brand": "Sako",
+        "quantity": "20",
+        "pricePerRound": "2.995€",
+        "total": "59.90€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.sissos.fi/metsastys/swiss-p-ds-1-223-rem-fmj-3-56-g-1000-ptr/p/27640231350135/",
+        "retailer": "Sissos",
+        "productName": "Swiss P DS-1 .223 Rem. FMJ 3,56 g",
+        "productDetails": "",
+        "brand": "Swiss P",
+        "quantity": "1000",
+        "pricePerRound": "0.565€",
+        "total": "565.00€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://viranomainen.fi/p140848/swiss-p-223-rem-ds-1-3-6-55gr-fmj-50kpl",
+        "retailer": "Viranomainen",
+        "productName": "Swiss P\n.223 Rem DS-1 3,6/55gr FMJ 50kpl",
+        "productDetails": "",
+        "brand": "Swiss P",
+        "quantity": "50",
+        "pricePerRound": "0.678€",
+        "total": "33.90€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.asepajamvuorela.fi/kauppa/patruunat/kivaarin-patruunat/223rem/lapua-3-2g-naturalis-227-rem/",
+        "retailer": "Asepaja Vuorela",
+        "productName": "Lapua .223 Rem 3.2g Naturalis",
+        "productDetails": "",
+        "brand": "Lapua",
+        "quantity": "20",
+        "pricePerRound": "3.300€",
+        "total": "66.00€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.oulunase.fi/product/638/stv-scorpio-223-rem-fmj--356-g--1000-ptr",
+        "retailer": "Oulun Ase",
+        "productName": "STV Scorpio .223 Rem FMJ  3,56 g  1000 ptr",
+        "productDetails": "",
+        "brand": "STV",
+        "quantity": "1000",
+        "pricePerRound": "0.535€",
+        "total": "535.00€",
+        "status": "Available",
+        "nonToxic": true
       }
     ],
     "308 Winchester": [
@@ -1113,6 +1229,378 @@
         "pricePerRound": "1.299€",
         "total": "25.99€",
         "status": "Available"
+      },
+      {
+        "url": "https://www.aawee.fi/fi/patruunat-ja-jalleenlataus/308-win-lapua-naturalis-11-0g-20kpl-lapua-patruuna-n558-20kpl/p/N317105/",
+        "retailer": "Aawee",
+        "productName": "308 Win Lapua Naturalis 11,0g 20kpl",
+        "productDetails": "",
+        "brand": "Lapua",
+        "quantity": "20",
+        "pricePerRound": "3.625€",
+        "total": "72.50€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.aawee.fi/fi/patruunat-ja-jalleenlataus/308-win-norma-odin-10-5g-20kpl-norma-308-win-162gr-odin-20kpl/p/P8NP20178212/",
+        "retailer": "Aawee",
+        "productName": "308 Win Norma ODIN 10,5g 20kpl",
+        "productDetails": "",
+        "brand": "Norma",
+        "quantity": "20",
+        "pricePerRound": "3.950€",
+        "total": "79.00€",
+        "status": "Out of Stock",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.aawee.fi/fi/patruunat-ja-jalleenlataus/308-win-sako-powerhead-blade-10-5g-20kpl-patruuna-656a-powerhead-308win/p/C629656ASA10/",
+        "retailer": "Aawee",
+        "productName": "308 Win Sako Powerhead BLADE 10,5g 20kpl",
+        "productDetails": "",
+        "brand": "Sako",
+        "quantity": "20",
+        "pricePerRound": "3.845€",
+        "total": "76.90€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.aawee.fi/fi/patruunat-ja-jalleenlataus/308-win-sako-powerhead-blade-pro-10-5g-20kpl-patruuna-644a-powerhead-308-win/p/C629644ASA10/",
+        "retailer": "Aawee",
+        "productName": "308 Win Sako Powerhead Blade PRO 10,5g 20kpl",
+        "productDetails": "",
+        "brand": "Sako",
+        "quantity": "20",
+        "pricePerRound": "4.495€",
+        "total": "89.90€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.aawee.fi/fi/patruunat-ja-jalleenlataus/308-win-sako-powerhead-blade-pro-8-4g-20kpl-patruuna-636a-powerhead-308-win/p/C629636ASA10/",
+        "retailer": "Aawee",
+        "productName": "308 Win Sako Powerhead Blade PRO 8,4g 20kpl",
+        "productDetails": "",
+        "brand": "Sako",
+        "quantity": "20",
+        "pricePerRound": "3.995€",
+        "total": "79.90€",
+        "status": "Out of Stock",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.aawee.fi/fi/patruunat-ja-jalleenlataus/308-win-norma-ecostrike-v2-9-7g-20kpl-norma-kiv-ptr-20kpl/p/20177562/",
+        "retailer": "Aawee",
+        "productName": "308 Win Norma Ecostrike v2 9,7g 20kpl",
+        "productDetails": "",
+        "brand": "Norma",
+        "quantity": "20",
+        "pricePerRound": "5.250€",
+        "total": "105.00€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.aawee.fi/fi/patruunat-ja-jalleenlataus/308-win-barnes-9-7g-ttsx-20kpl-patruuna/p/124120/",
+        "retailer": "Aawee",
+        "productName": "308 Win BARNES 9,7g TTSX 20kpl",
+        "productDetails": "",
+        "brand": "Barnes",
+        "quantity": "20",
+        "pricePerRound": "4.950€",
+        "total": "99.00€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.aawee.fi/fi/patruunat-ja-jalleenlataus/308-win-barnes-vor-tx-euro-10-9g-ttsx-20kpl-20kpl-patruuna/p/124130/",
+        "retailer": "Aawee",
+        "productName": "308 Win BARNES VOR-TX Euro 10,9g TTSX 20kpl",
+        "productDetails": "",
+        "brand": "Barnes",
+        "quantity": "20",
+        "pricePerRound": "4.950€",
+        "total": "99.00€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.aawee.fi/fi/patruunat-ja-jalleenlataus/308-win-barnes-vor-tx-euro-8-4g-ttsx-20-kpl-patruuna-vor-tx-euro130gr-ttsx-bt/p/124110/",
+        "retailer": "Aawee",
+        "productName": "308 Win BARNES VOR-TX Euro 8,4g TTSX 20 kpl",
+        "productDetails": "",
+        "brand": "Barnes",
+        "quantity": "20",
+        "pricePerRound": "4.950€",
+        "total": "99.00€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.motonet.fi/tuote/sako-308-win-powerhead-blade-105-g-20-kpl?product=55-15645",
+        "retailer": "Motonet",
+        "productName": "Sako .308 Win Powerhead Blade 10,5 g 20 kpl",
+        "productDetails": "",
+        "brand": "Sako",
+        "quantity": "20",
+        "pricePerRound": "3.745€",
+        "total": "74.90€",
+        "status": "Out of Stock",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.motonet.fi/tuote/sako-powerhead-blade-pro-308-w-105162-tec-644a-20-kpl?product=55-24513",
+        "retailer": "Motonet",
+        "productName": "Sako Powerhead Blade Pro .308 W 10.5/162 TEC 644A 20 kpl",
+        "productDetails": "",
+        "brand": "Sako",
+        "quantity": "20",
+        "pricePerRound": "4.995€",
+        "total": "99.90€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.motonet.fi/tuote/sako-powerhead-blade-pro-308-w-78120-tec-634a-20-kpl?product=55-24511",
+        "retailer": "Motonet",
+        "productName": "Sako Powerhead Blade Pro .308 W 7.8/120 TEC 634A 20 kpl",
+        "productDetails": "",
+        "brand": "Sako",
+        "quantity": "20",
+        "pricePerRound": "4.995€",
+        "total": "99.90€",
+        "status": "Out of Stock",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.motonet.fi/tuote/sako-powerhead-blade-pro-308-w-84130-tec-636a-20-kpl?product=55-24512",
+        "retailer": "Motonet",
+        "productName": "Sako Powerhead Blade Pro .308 W 8.4/130 TEC 636A 20 kpl",
+        "productDetails": "",
+        "brand": "Sako",
+        "quantity": "20",
+        "pricePerRound": "4.995€",
+        "total": "99.90€",
+        "status": "Out of Stock",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.motonet.fi/tuote/norma-308-win-97-g150-gr-ecostrike-20-kpl?product=55-08473",
+        "retailer": "Motonet",
+        "productName": "Norma .308 Win. 9,7 g/150 gr Ecostrike 20 kpl",
+        "productDetails": "",
+        "brand": "Norma",
+        "quantity": "20",
+        "pricePerRound": "4.095€",
+        "total": "81.90€",
+        "status": "Out of Stock",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.motonet.fi/tuote/norma-308-win-evostrike-90139-20-kpl?product=55-24492",
+        "retailer": "Motonet",
+        "productName": "Norma .308 Win Evostrike 9.0/139 20 kpl",
+        "productDetails": "",
+        "brand": "Norma",
+        "quantity": "20",
+        "pricePerRound": "4.995€",
+        "total": "99.90€",
+        "status": "Out of Stock",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.motonet.fi/tuote/lapua-naturalis-308-win-110-g-20-kpl?product=55-09102",
+        "retailer": "Motonet",
+        "productName": "Lapua Naturalis .308 Win 11,0 g 20 kpl",
+        "productDetails": "",
+        "brand": "Lapua",
+        "quantity": "20",
+        "pricePerRound": "3.995€",
+        "total": "79.90€",
+        "status": "Out of Stock",
+        "nonToxic": true
+      },
+      {
+        "url": "https://viranomainen.fi/p89335/norma-308-9-7g-150gr-ecostrike-20-kpl",
+        "retailer": "Viranomainen",
+        "productName": "Norma\n.308 9,7g/150gr Ecostrike 20 kpl",
+        "productDetails": "",
+        "brand": "Norma",
+        "quantity": "20",
+        "pricePerRound": "4.745€",
+        "total": "94.90€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://viranomainen.fi/p139398/sako-308-win-powerhead-blade-655a-10-5g-162grs-20-kpl",
+        "retailer": "Viranomainen",
+        "productName": "Sako\n.308 Win Powerhead Blade 655A 10,5g / 162grs 20 kpl",
+        "productDetails": "",
+        "brand": "Sako",
+        "quantity": "20",
+        "pricePerRound": "3.495€",
+        "total": "69.90€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://viranomainen.fi/p31520/lapua-308-win-11-0-g-naturalis-lr-20-kpl",
+        "retailer": "Viranomainen",
+        "productName": "Lapua\n.308 Win 11,0 g Naturalis LR 20 kpl",
+        "productDetails": "",
+        "brand": "Lapua",
+        "quantity": "20",
+        "pricePerRound": "3.995€",
+        "total": "79.90€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.asepajamvuorela.fi/kauppa/patruunat/kivaarin-patruunat/308win/norma-9-7g-eco-strike-308-win/",
+        "retailer": "Asepaja Vuorela",
+        "productName": "Norma .308 Win EcoStrike 9,7g",
+        "productDetails": "",
+        "brand": "Norma",
+        "quantity": "20",
+        "pricePerRound": "4.700€",
+        "total": "94.00€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.asepajamvuorela.fi/kauppa/patruunat/kivaarin-patruunat/308win/sako-10-5g-blade-308-win/",
+        "retailer": "Asepaja Vuorela",
+        "productName": "Sako Powerhead Blade .308 Win 10,5g",
+        "productDetails": "",
+        "brand": "Sako",
+        "quantity": "20",
+        "pricePerRound": "3.750€",
+        "total": "75.00€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.asepajamvuorela.fi/kauppa/patruunat/kivaarin-patruunat/308win/sako-powerhead-blade-308-win-97g-2/",
+        "retailer": "Asepaja Vuorela",
+        "productName": "Sako Powerhead Blade .308 Win 9,7g",
+        "productDetails": "",
+        "brand": "Sako",
+        "quantity": "20",
+        "pricePerRound": "3.750€",
+        "total": "75.00€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.asepajamvuorela.fi/kauppa/patruunat/kivaarin-patruunat/308win/sako-powerhead-blade-pro-308-win-uutuus-2025/",
+        "retailer": "Asepaja Vuorela",
+        "productName": "Sako Powerhead Blade Pro .308 Win",
+        "productDetails": "",
+        "brand": "Sako",
+        "quantity": "20",
+        "pricePerRound": "4.450€",
+        "total": "89.00€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.asepajamvuorela.fi/kauppa/patruunat/kivaarin-patruunat/308win/lapua-11g-nat-308-win/",
+        "retailer": "Asepaja Vuorela",
+        "productName": "Lapua 308Win 11g Naturalis",
+        "productDetails": "",
+        "brand": "Lapua",
+        "quantity": "20",
+        "pricePerRound": "3.700€",
+        "total": "74.00€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.asepajamvuorela.fi/kauppa/patruunat/kivaarin-patruunat/308win/barnes-ttsx-168gr-308-win/",
+        "retailer": "Asepaja Vuorela",
+        "productName": "Barnes .308 Win VOR-TX TTSX 10,9g",
+        "productDetails": "",
+        "brand": "Barnes",
+        "quantity": "20",
+        "pricePerRound": "4.950€",
+        "total": "99.00€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.metsoase.fi/kivaarit/sako-powerhead-blade-308-win-656a-10-5g-kivaarin-patruuna-20kpl/p/6438053141328/",
+        "retailer": "Metso Ase",
+        "productName": "Sako Powerhead Blade .308 Win 656A 10,5g Kiväärin Patruuna 20kpl",
+        "productDetails": "",
+        "brand": "Sako",
+        "quantity": "20",
+        "pricePerRound": "3.749€",
+        "total": "74.99€",
+        "status": "Out of Stock",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.erakolmio.com/tuote/sako-powerhead-blade-pro-308-win-84g-lyijyton-metsastyspatruuna-pitkille-matkoille/",
+        "retailer": "Erakolmio",
+        "productName": "Sako Powerhead Blade Pro .308 Win 8,4g – Lyijytön metsästyspatruuna pitkille matkoille",
+        "productDetails": "",
+        "brand": "Sako",
+        "quantity": "20",
+        "pricePerRound": "4.950€",
+        "total": "99.00€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.erakolmio.com/tuote/sako-powerhead-blade-pro-308-win-105g-20ptr/",
+        "retailer": "Erakolmio",
+        "productName": "Sako Powerhead Blade Pro .308 Win. 10,5g 20ptr",
+        "productDetails": "",
+        "brand": "Sako",
+        "quantity": "20",
+        "pricePerRound": "4.950€",
+        "total": "99.00€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.erakolmio.com/tuote/lapua-308win-patruuna-solid-trx-n585-97-g/",
+        "retailer": "Erakolmio",
+        "productName": "Lapua .308Win patruuna, Solid TRX N585, 9,7 g",
+        "productDetails": "",
+        "brand": "Lapua",
+        "quantity": "20",
+        "pricePerRound": "4.600€",
+        "total": "92.00€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.erakolmio.com/tuote/sako-powerhead-blade-308-win-105g-162gr-20kpl/",
+        "retailer": "Erakolmio",
+        "productName": "Sako Powerhead Blade .308 Win 10,5g/162gr 20kpl",
+        "productDetails": "",
+        "brand": "Sako",
+        "quantity": "20",
+        "pricePerRound": "3.745€",
+        "total": "74.90€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.seponurheilujapatruuna.fi/tuote/lapua-308-win-naturalis-11g/",
+        "retailer": "Seponurheilujapatruuna",
+        "productName": "Lapua .308 Win Naturalis 11g",
+        "productDetails": "",
+        "brand": "Lapua",
+        "quantity": "20",
+        "pricePerRound": "3.700€",
+        "total": "74.00€",
+        "status": "Available",
+        "nonToxic": true
       }
     ],
     "7.62x39": [
@@ -1125,7 +1613,8 @@
         "quantity": "500+ rounds",
         "pricePerRound": "0.530€",
         "total": "265.00€",
-        "status": "Available"
+        "status": "Available",
+        "nonToxic": true
       },
       {
         "url": "https://www.oulunase.fi/product/324/stv-scorpio-762x39-bulk-500-ptr",
@@ -1136,7 +1625,8 @@
         "quantity": "500+ rounds",
         "pricePerRound": "0.480€",
         "total": "240.00€",
-        "status": "Available"
+        "status": "Available",
+        "nonToxic": true
       },
       {
         "url": "https://www.sissos.fi/metsastys/geco-7-62x39-fmj-8-g-500-ptr-500-ptr/p/4000294178122_pkt/",

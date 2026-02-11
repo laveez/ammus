@@ -205,18 +205,14 @@ async function extractAvailability(page: Page): Promise<boolean | null> {
   })
 }
 
-async function extractNonToxic(page: Page): Promise<boolean | null> {
-  return page.evaluate(() => {
-    const keywords = [
-      'lyijyton', 'lyijytön',
-      'lead-free', 'lead free',
-      'non-toxic', 'non toxic', 'nontoxic',
-      'sintox', 'tfmj',
-      'monolithic', 'solid copper', 'kupariluoti',
-    ]
-    const pattern = new RegExp(keywords.join('|'), 'i')
+// Keywords that indicate non-toxic ammunition
+const NON_TOXIC_PATTERN = /lyijyt[oö]n|lead[- ]?free|non[- ]?toxic|nontoxic|sintox|\btfmj\b|monolithic|solid copper|kupariluoti|scorpio|powerhead.blade|ecostrike|eco.strike|evostrike|naturalis|\bttsx\b|exergy|\bodin\b/i
 
-    // JSON-LD product name + description
+async function extractNonToxic(page: Page): Promise<boolean | null> {
+  return page.evaluate((patternSource) => {
+    const pattern = new RegExp(patternSource, 'i')
+
+    // JSON-LD product name + description only
     const scripts = document.querySelectorAll('script[type="application/ld+json"]')
     for (const script of scripts) {
       try {
@@ -231,17 +227,17 @@ async function extractNonToxic(page: Page): Promise<boolean | null> {
       } catch { /* skip */ }
     }
 
-    // Meta description
-    const metaDesc = document.querySelector<HTMLMetaElement>('meta[name="description"]')
-    if (metaDesc?.content && pattern.test(metaDesc.content)) return true
-
-    // Visible page text within product area
-    const container = document.querySelector('.product, main, article') || document.body
-    const text = container?.textContent || ''
-    if (pattern.test(text)) return true
+    // Product title (h1) only — avoids sidebar/related product contamination
+    const h1 = document.querySelector('h1')?.textContent || ''
+    if (pattern.test(h1)) return true
 
     return null
-  })
+  }, NON_TOXIC_PATTERN.source)
+}
+
+function isNonToxicByName(product: Product): boolean {
+  const text = `${product.productName} ${product.productDetails} ${product.brand}`
+  return NON_TOXIC_PATTERN.test(text)
 }
 
 async function extractPrice(page: Page): Promise<PriceResult> {
@@ -413,14 +409,13 @@ async function main() {
       }
     }
 
-    // Update non-toxic status for all entries sharing this URL
-    if (result.nonToxic === true) {
-      for (const { product } of entries) {
-        if (product.nonToxic !== true) {
-          console.log(`  ${product.retailer} | ${product.productName} — non-toxic: detected`)
-          product.nonToxic = true
-          corrections++
-        }
+    // Update non-toxic status: page-level detection OR product name match
+    for (const { product } of entries) {
+      const isNT = result.nonToxic === true || isNonToxicByName(product)
+      if (isNT && product.nonToxic !== true) {
+        console.log(`  ${product.retailer} | ${product.productName} — non-toxic: detected`)
+        product.nonToxic = true
+        corrections++
       }
     }
 
