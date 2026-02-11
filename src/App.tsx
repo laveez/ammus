@@ -3,7 +3,9 @@ import './App.css'
 import data from './data/products.json'
 import { Header } from './components/Header'
 import { CaliberTabs } from './components/CaliberTabs'
+import { FilterBar, defaultFilters } from './components/FilterBar'
 import { PriceTable } from './components/PriceTable'
+import type { Filters } from './components/FilterBar'
 
 function getInitialCaliber(): string {
   const params = new URLSearchParams(window.location.search)
@@ -14,7 +16,7 @@ function getInitialCaliber(): string {
 
 function App() {
   const [activeCaliber, setActiveCaliber] = useState(getInitialCaliber)
-  const [showOnlyNonToxic, setShowOnlyNonToxic] = useState(false)
+  const [filters, setFilters] = useState<Filters>(defaultFilters)
 
   const handleCaliberChange = useCallback((caliber: string) => {
     setActiveCaliber(caliber)
@@ -33,15 +35,8 @@ function App() {
         active={activeCaliber}
         onChange={handleCaliberChange}
       />
-      <label className="filter-toggle">
-        <input
-          type="checkbox"
-          checked={showOnlyNonToxic}
-          onChange={e => setShowOnlyNonToxic(e.target.checked)}
-        />
-        Non-toxic only
-      </label>
-      <PriceTable products={products} showOnlyNonToxic={showOnlyNonToxic} />
+      <FilterBar products={products} filters={filters} onChange={setFilters} />
+      <PriceTable products={products} filters={filters} />
     </div>
   )
 }

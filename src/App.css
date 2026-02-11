@@ -7,8 +7,8 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
   line-height: 1.5;
-  color: #1a1a2e;
-  background: #f0f2f5;
+  color: #e5e7eb;
+  background: #0f0f13;
 }
 
 .container {
@@ -27,7 +27,7 @@ body {
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: -0.5px;
-  color: #1a1a2e;
+  color: #f9fafb;
 }
 
 /* Tabs */
@@ -44,45 +44,154 @@ body {
   padding: 10px 20px;
   font-size: 14px;
   font-weight: 500;
-  color: #6b7280;
+  color: #9ca3af;
   cursor: pointer;
   border-radius: 8px;
   transition: all 0.15s ease;
 }
 
 .tab-button:hover {
-  background: #e5e7eb;
-  color: #1a1a2e;
+  background: #1f2937;
+  color: #f9fafb;
 }
 
 .tab-button.active {
-  background: #1a1a2e;
-  color: #fff;
+  background: #f9fafb;
+  color: #0f0f13;
 }
 
-/* Filter toggle */
+/* Filter bar */
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  background: #1a1a2e;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  flex-wrap: wrap;
+}
+
 .filter-toggle {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
   gap: 6px;
-  margin-bottom: 12px;
   font-size: 14px;
   font-weight: 500;
-  color: #4b5563;
+  color: #9ca3af;
   cursor: pointer;
   user-select: none;
+  white-space: nowrap;
 }
 
 .filter-toggle input[type="checkbox"] {
   cursor: pointer;
+  accent-color: #6ee7b7;
+}
+
+/* Multi-select dropdown */
+.multi-select {
+  position: relative;
+}
+
+.multi-select-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: #16162a;
+  border: 1px solid #2d2d44;
+  border-radius: 6px;
+  color: #9ca3af;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.15s ease;
+}
+
+.multi-select-button:hover {
+  border-color: #4b5563;
+}
+
+.multi-select-button.has-selection {
+  color: #e5e7eb;
+  border-color: #6ee7b7;
+}
+
+.multi-select-arrow {
+  font-size: 9px;
+  opacity: 0.6;
+}
+
+.multi-select-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 180px;
+  max-height: 240px;
+  overflow-y: auto;
+  background: #16162a;
+  border: 1px solid #2d2d44;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  z-index: 100;
+  padding: 4px;
+}
+
+.multi-select-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  font-size: 13px;
+  color: #e5e7eb;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.1s ease;
+}
+
+.multi-select-option:hover {
+  background: #22223a;
+}
+
+.multi-select-option input[type="checkbox"] {
+  cursor: pointer;
+  accent-color: #6ee7b7;
+}
+
+/* Filter inputs */
+.filter-input {
+  padding: 6px 10px;
+  width: 110px;
+  background: #16162a;
+  border: 1px solid #2d2d44;
+  border-radius: 6px;
+  color: #e5e7eb;
+  font-size: 13px;
+  font-weight: 500;
+  transition: border-color 0.15s ease;
+}
+
+.filter-input:hover {
+  border-color: #4b5563;
+}
+
+.filter-input:focus {
+  outline: none;
+  border-color: #6ee7b7;
+}
+
+.filter-input::placeholder {
+  color: #6b7280;
 }
 
 /* Non-toxic badge */
 .non-toxic-badge {
   display: inline-block;
-  background: #d1fae5;
-  color: #065f46;
+  background: #064e3b;
+  color: #6ee7b7;
   font-weight: 700;
   font-size: 11px;
   padding: 2px 6px;
@@ -100,9 +209,9 @@ body {
 
 /* Table Container */
 .table-container {
-  background: #fff;
+  background: #1a1a2e;
   border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -116,7 +225,7 @@ body {
 }
 
 .price-table thead {
-  background: #f9fafb;
+  background: #16162a;
   position: sticky;
   top: 0;
 }
@@ -128,8 +237,8 @@ body {
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: #6b7280;
-  border-bottom: 1px solid #e5e7eb;
+  color: #9ca3af;
+  border-bottom: 1px solid #2d2d44;
   white-space: nowrap;
 }
 
@@ -139,11 +248,11 @@ body {
 }
 
 .price-table th.sortable:hover {
-  color: #1a1a2e;
+  color: #f9fafb;
 }
 
 .price-table th.sortable.active {
-  color: #1a1a2e;
+  color: #f9fafb;
 }
 
 .sort-arrow {
@@ -153,7 +262,7 @@ body {
 
 .price-table td {
   padding: 12px 16px;
-  border-bottom: 1px solid #f3f4f6;
+  border-bottom: 1px solid #2d2d44;
   vertical-align: middle;
 }
 
@@ -164,19 +273,19 @@ body {
 }
 
 .clickable-row:hover {
-  background: #f8fafc;
+  background: #22223a;
 }
 
 /* Product column */
 .product-name {
   font-weight: 500;
-  color: #1a1a2e;
+  color: #f9fafb;
   margin-bottom: 1px;
 }
 
 .product-details {
   font-size: 12px;
-  color: #9ca3af;
+  color: #6b7280;
 }
 
 /* Price cells */
@@ -186,9 +295,9 @@ body {
 }
 
 .best-price {
-  background: #ecfdf5;
+  background: #064e3b;
   font-weight: 700;
-  color: #065f46;
+  color: #6ee7b7;
 }
 
 /* Status */
@@ -209,7 +318,7 @@ body {
 }
 
 .status-indicator.available {
-  color: #059669;
+  color: #6ee7b7;
 }
 
 .status-indicator.available::before {
@@ -217,7 +326,7 @@ body {
 }
 
 .status-indicator.unavailable {
-  color: #dc2626;
+  color: #f87171;
 }
 
 .status-indicator.unavailable::before {
@@ -242,6 +351,11 @@ body {
   .tab-button {
     padding: 8px 14px;
     font-size: 13px;
+  }
+
+  .filter-bar {
+    gap: 8px;
+    padding: 10px 12px;
   }
 
   .table-container {

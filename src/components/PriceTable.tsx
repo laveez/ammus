@@ -1,10 +1,11 @@
 import { useState, useMemo } from 'react'
+import type { Filters } from './FilterBar'
 
 interface Product {
   url: string
   retailer: string
   productName: string
-  productDetails: string
+  productDetails?: string
   brand: string
   quantity: string
   pricePerRound: string
@@ -50,10 +51,10 @@ function getSortValue(product: Product, column: SortColumn): number | string {
 
 interface PriceTableProps {
   products: Product[]
-  showOnlyNonToxic: boolean
+  filters: Filters
 }
 
-export function PriceTable({ products, showOnlyNonToxic }: PriceTableProps) {
+export function PriceTable({ products, filters }: PriceTableProps) {
   const [sortColumn, setSortColumn] = useState<SortColumn>('per-unit')
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc')
 
@@ -67,8 +68,16 @@ export function PriceTable({ products, showOnlyNonToxic }: PriceTableProps) {
   }
 
   const filtered = useMemo(() =>
-    showOnlyNonToxic ? products.filter(p => p.nonToxic === true) : products
-  , [products, showOnlyNonToxic])
+    products.filter(p => {
+      if (filters.nonToxicOnly && p.nonToxic !== true) return false
+      if (filters.inStockOnly && p.status !== 'Available') return false
+      if (filters.retailers.length > 0 && !filters.retailers.includes(p.retailer)) return false
+      if (filters.brands.length > 0 && !filters.brands.includes(p.brand)) return false
+      if (filters.maxPricePerRound != null && parsePrice(p.pricePerRound) > filters.maxPricePerRound) return false
+      if (filters.maxQuantity != null && parseQuantity(p.quantity) > filters.maxQuantity) return false
+      return true
+    })
+  , [products, filters])
 
   const sorted = useMemo(() => {
     const copy = [...filtered]
@@ -96,10 +105,10 @@ export function PriceTable({ products, showOnlyNonToxic }: PriceTableProps) {
     if (url) window.open(url, '_blank', 'noopener,noreferrer')
   }
 
-  if (showOnlyNonToxic && filtered.length === 0) {
+  if (filtered.length === 0) {
     return (
       <div className="table-container">
-        <p className="empty-state">No non-toxic ammunition found for this caliber.</p>
+        <p className="empty-state">No products match the current filters.</p>
       </div>
     )
   }
@@ -145,7 +154,7 @@ export function PriceTable({ products, showOnlyNonToxic }: PriceTableProps) {
                 <td className="type">
                   {product.nonToxic === true && <span className="non-toxic-badge">NT</span>}
                 </td>
-                <td className="quantity">{product.quantity}</td>
+                <td className="quantity">{parseQuantity(product.quantity)} kpl</td>
                 <td className={`per-unit price${isBest ? ' best-price' : ''}`}>
                   {product.pricePerRound}
                 </td>
