@@ -206,7 +206,7 @@ async function extractAvailability(page: Page): Promise<boolean | null> {
 }
 
 // Keywords that indicate non-toxic ammunition
-const NON_TOXIC_PATTERN = /lyijyt[oö]n|lead[- ]?free|non[- ]?toxic|nontoxic|sintox|\btfmj\b|monolithic|solid copper|kupariluoti|powerhead.blade|ecostrike|eco.strike|evostrike|naturalis|\bttsx\b|exergy|\bodin\b/i
+const NON_TOXIC_PATTERN = /lyijyt[oö]n|lead[- ]?free|non[- ]?toxic|nontoxic|sintox|\btfmj\b|monolithic|solid copper|kupariluoti|powerhead.blade|ecostrike|eco.strike|evostrike|naturalis|\bttsx\b|exergy|\bodin\b|clean.range|scorpio.eco/i
 
 async function extractNonToxic(page: Page): Promise<boolean | null> {
   return page.evaluate((patternSource) => {

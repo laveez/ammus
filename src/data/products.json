@@ -15,8 +15,8 @@
         "productDetails": "FMJ 124gr",
         "brand": "Scorpio",
         "quantity": "2000+ rounds",
-        "pricePerRound": "0.338€",
-        "total": "674.65€",
+        "pricePerRound": "0.290€",
+        "total": "580.00€",
         "status": "Available"
       },
       {
@@ -26,8 +26,8 @@
         "productDetails": "FMJ 124gr",
         "brand": "Scorpio",
         "quantity": "6000+ rounds",
-        "pricePerRound": "0.338€",
-        "total": "2 024.62€",
+        "pricePerRound": "0.285€",
+        "total": "1710.00€",
         "status": "Available"
       },
       {
@@ -70,8 +70,8 @@
         "productDetails": "FMJ 124gr",
         "brand": "Scorpio",
         "quantity": "1000+ rounds",
-        "pricePerRound": "0.338€",
-        "total": "338.00€",
+        "pricePerRound": "0.299€",
+        "total": "299.00€",
         "status": "Available"
       },
       {
@@ -158,8 +158,8 @@
         "productDetails": "FMJ 8.0g",
         "brand": "Sellier & Bellot",
         "quantity": "1000+ rounds",
-        "pricePerRound": "0.358€",
-        "total": "358.00€",
+        "pricePerRound": "0.309€",
+        "total": "309.00€",
         "status": "Out of Stock"
       },
       {
@@ -297,13 +297,85 @@
       {
         "url": "https://viranomainen.fi/p140970/sellier-bellot-9mm-luger-tfmj-8-0g-nontox-50kpl",
         "retailer": "Viranomainen",
-        "productName": "Sellier & Bellot\n9mm Luger TFMJ 8,0g NonTox 50kpl",
+        "productName": "Sellier & Bellot 9mm Luger TFMJ 8,0g NonTox 50kpl",
         "productDetails": "",
         "brand": "Sellier & Bellot",
         "quantity": "50",
         "pricePerRound": "0.390€",
         "total": "19.50€",
         "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.aawee.fi/fi/patruunat-ja-jalleenlataus/9x19-sellier-bellot-nontox-8-0g-tfmj-sellierbellot-9mm-luger-123gr-n-tox/p/V311562/",
+        "retailer": "Aawee",
+        "productName": "9x19 Sellier & Bellot NonTox 8,0g TFMJ",
+        "productDetails": "TFMJ 8g NonTox",
+        "brand": "Sellier & Bellot",
+        "quantity": "50",
+        "pricePerRound": "0.418€",
+        "total": "20.90€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.aawee.fi/fi/patruunat-ja-jalleenlataus/scorpio-eco-9x19-124gr-tfmj-pistoolin-patruuna-stv-scorpio-nontoxic-patruuna-50kpl-rasia-1000kpl-laatikko/p/V00070-50/",
+        "retailer": "Aawee",
+        "productName": "Scorpio ECO 9x19 124gr TFMJ pistoolinpatruuna",
+        "productDetails": "TFMJ 124gr NonTox",
+        "brand": "STV Scorpio",
+        "quantity": "50",
+        "pricePerRound": "0.390€",
+        "total": "19.50€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.aawee.fi/fi/patruunat-ja-jalleenlataus/scorpio-eco-9x19-124gr-tfmj-pistoolin-patruuna-stv-scorpio-nontoxic-patruuna-50kpl-rasia-1000kpl-laatikko/p/V00070-50/",
+        "retailer": "Aawee",
+        "productName": "Scorpio ECO 9x19 124gr TFMJ pistoolinpatruuna",
+        "productDetails": "TFMJ 124gr NonTox",
+        "brand": "STV Scorpio",
+        "quantity": "1000",
+        "pricePerRound": "0.349€",
+        "total": "349.00€",
+        "status": "Out of Stock",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.aawee.fi/fi/patruunat-ja-jalleenlataus/scorpio-eco-9x19-124gr-tfmj-pistoolin-patruuna-stv-scorpio-nontoxic-patruuna-50kpl-rasia-1000kpl-laatikko/p/V00070-50/",
+        "retailer": "Aawee",
+        "productName": "Scorpio ECO 9x19 124gr TFMJ pistoolinpatruuna",
+        "productDetails": "TFMJ 124gr NonTox",
+        "brand": "STV Scorpio",
+        "quantity": "2000",
+        "pricePerRound": "0.339€",
+        "total": "678.00€",
+        "status": "Out of Stock",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.aawee.fi/fi/patruunat-ja-jalleenlataus/scorpio-eco-9x19-124gr-tfmj-pistoolin-patruuna-stv-scorpio-nontoxic-patruuna-50kpl-rasia-1000kpl-laatikko/p/V00070-50/",
+        "retailer": "Aawee",
+        "productName": "Scorpio ECO 9x19 124gr TFMJ pistoolinpatruuna",
+        "productDetails": "TFMJ 124gr NonTox",
+        "brand": "STV Scorpio",
+        "quantity": "6000",
+        "pricePerRound": "0.333€",
+        "total": "1999.00€",
+        "status": "Out of Stock",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.aawee.fi/fi/patruunat-ja-jalleenlataus/9x19-magtech-8g-clean-range-feb-magtech-cr9b-50kpl-clean-range/p/158127/",
+        "retailer": "Aawee",
+        "productName": "9x19 Magtech 8g Clean Range FEB",
+        "productDetails": "FEB 8g Clean Range",
+        "brand": "Magtech",
+        "quantity": "50",
+        "pricePerRound": "0.458€",
+        "total": "22.90€",
+        "status": "Out of Stock",
         "nonToxic": true
       }
     ],
@@ -502,8 +574,8 @@
         "productDetails": "2.6g",
         "brand": "Federal",
         "quantity": "5000+ rounds",
-        "pricePerRound": "0.158€",
-        "total": "788.74€",
+        "pricePerRound": "0.126€",
+        "total": "629.00€",
         "status": "Available"
       },
       {
@@ -524,8 +596,8 @@
         "productDetails": "Standard Velocity 2.6g (40gr)",
         "brand": "CCI",
         "quantity": "5000+ rounds",
-        "pricePerRound": "0.150€",
-        "total": "748.80€",
+        "pricePerRound": "0.132€",
+        "total": "659.00€",
         "status": "Available"
       },
       {
@@ -546,8 +618,8 @@
         "productDetails": "Standard Velocity 2.6g (40gr)",
         "brand": "CCI",
         "quantity": "500+ rounds",
-        "pricePerRound": "0.150€",
-        "total": "74.85€",
+        "pricePerRound": "0.140€",
+        "total": "69.90€",
         "status": "Available"
       },
       {
@@ -568,8 +640,8 @@
         "productDetails": "2.6g",
         "brand": "Federal",
         "quantity": "500+ rounds",
-        "pricePerRound": "0.158€",
-        "total": "78.84€",
+        "pricePerRound": "0.144€",
+        "total": "72.00€",
         "status": "Available"
       },
       {
@@ -626,8 +698,8 @@
         "productDetails": "FMJ 55gr",
         "brand": "STV Scorpio",
         "quantity": "6000+ rounds",
-        "pricePerRound": "0.620€",
-        "total": "3 716.28€",
+        "pricePerRound": "0.522€",
+        "total": "3129.00€",
         "status": "Available"
       },
       {
@@ -637,8 +709,8 @@
         "productDetails": "FMJ 55gr",
         "brand": "STV Scorpio",
         "quantity": "2000+ rounds",
-        "pricePerRound": "0.620€",
-        "total": "1 238.76€",
+        "pricePerRound": "0.535€",
+        "total": "1069.00€",
         "status": "Available"
       },
       {
@@ -659,8 +731,8 @@
         "productDetails": "FMJ 62gr",
         "brand": "GGG",
         "quantity": "1200+ rounds",
-        "pricePerRound": "0.738€",
-        "total": "885.60€",
+        "pricePerRound": "0.708€",
+        "total": "849.00€",
         "status": "Out of Stock"
       },
       {
@@ -670,8 +742,8 @@
         "productDetails": "FMJ 55gr",
         "brand": "STV Scorpio",
         "quantity": "1000+ rounds",
-        "pricePerRound": "0.620€",
-        "total": "620.00€",
+        "pricePerRound": "0.549€",
+        "total": "549.00€",
         "status": "Available"
       },
       {
@@ -989,7 +1061,7 @@
       {
         "url": "https://viranomainen.fi/p140848/swiss-p-223-rem-ds-1-3-6-55gr-fmj-50kpl",
         "retailer": "Viranomainen",
-        "productName": "Swiss P\n.223 Rem DS-1 3,6/55gr FMJ 50kpl",
+        "productName": "Swiss P .223 Rem DS-1 3,6/55gr FMJ 50kpl",
         "productDetails": "",
         "brand": "Swiss P",
         "quantity": "50",
@@ -1020,6 +1092,30 @@
         "pricePerRound": "0.535€",
         "total": "535.00€",
         "status": "Available"
+      },
+      {
+        "url": "https://www.uittokalusto.fi/lapua-223-rem-naturalis-3-2-g.html",
+        "retailer": "Uittokalusto",
+        "productName": "Lapua .223 Rem Naturalis 3,2g",
+        "productDetails": "Naturalis 3.2g",
+        "brand": "Lapua",
+        "quantity": "20",
+        "pricePerRound": "3.500€",
+        "total": "69.99€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.uittokalusto.fi/sako-223-rem-powerhead-blade-3-56-55-tec-648g.html",
+        "retailer": "Uittokalusto",
+        "productName": "Sako 223 Rem Powerhead Blade",
+        "productDetails": "Powerhead Blade 3.56g",
+        "brand": "Sako",
+        "quantity": "20",
+        "pricePerRound": "1.995€",
+        "total": "39.90€",
+        "status": "Available",
+        "nonToxic": true
       }
     ],
     "308 Winchester": [
@@ -1041,9 +1137,9 @@
         "productDetails": "FMJ 9.5g",
         "brand": "PMC",
         "quantity": "500+ rounds",
-        "pricePerRound": "1.195€",
-        "total": "597.50€",
-        "status": "Available"
+        "pricePerRound": "1.020€",
+        "total": "510.00€",
+        "status": "Out of Stock"
       },
       {
         "url": "https://www.metsoase.fi/kivaarit/ggg-nato-308win-9-5g-fmj-kivaarin-patruuna/p/4779032300193/",
@@ -1416,7 +1512,7 @@
       {
         "url": "https://viranomainen.fi/p89335/norma-308-9-7g-150gr-ecostrike-20-kpl",
         "retailer": "Viranomainen",
-        "productName": "Norma\n.308 9,7g/150gr Ecostrike 20 kpl",
+        "productName": "Norma .308 9,7g/150gr Ecostrike 20 kpl",
         "productDetails": "",
         "brand": "Norma",
         "quantity": "20",
@@ -1428,7 +1524,7 @@
       {
         "url": "https://viranomainen.fi/p139398/sako-308-win-powerhead-blade-655a-10-5g-162grs-20-kpl",
         "retailer": "Viranomainen",
-        "productName": "Sako\n.308 Win Powerhead Blade 655A 10,5g / 162grs 20 kpl",
+        "productName": "Sako .308 Win Powerhead Blade 655A 10,5g / 162grs 20 kpl",
         "productDetails": "",
         "brand": "Sako",
         "quantity": "20",
@@ -1440,7 +1536,7 @@
       {
         "url": "https://viranomainen.fi/p31520/lapua-308-win-11-0-g-naturalis-lr-20-kpl",
         "retailer": "Viranomainen",
-        "productName": "Lapua\n.308 Win 11,0 g Naturalis LR 20 kpl",
+        "productName": "Lapua .308 Win 11,0 g Naturalis LR 20 kpl",
         "productDetails": "",
         "brand": "Lapua",
         "quantity": "20",
@@ -1592,6 +1688,42 @@
         "total": "74.00€",
         "status": "Available",
         "nonToxic": true
+      },
+      {
+        "url": "https://www.uittokalusto.fi/barnes-308-win-ttsx-bt-130g-8-4g-20-kpl.html",
+        "retailer": "Uittokalusto",
+        "productName": "Barnes 308 Win TTSX BT 130g/8,4g",
+        "productDetails": "TTSX BT 8.4g",
+        "brand": "Barnes",
+        "quantity": "20",
+        "pricePerRound": "3.995€",
+        "total": "79.90€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.uittokalusto.fi/lapua-308-solid-trx-9-7g-20kpl.html",
+        "retailer": "Uittokalusto",
+        "productName": "Lapua .308 Solid TRX 9,7g",
+        "productDetails": "Solid TRX 9.7g",
+        "brand": "Lapua",
+        "quantity": "20",
+        "pricePerRound": "3.995€",
+        "total": "79.90€",
+        "status": "Available",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.uittokalusto.fi/lapua-308-win-naturalis-11-0-g-1.html",
+        "retailer": "Uittokalusto",
+        "productName": "Lapua .308 Win Naturalis 11,0g",
+        "productDetails": "Naturalis 11.0g",
+        "brand": "Lapua",
+        "quantity": "20",
+        "pricePerRound": "3.865€",
+        "total": "77.30€",
+        "status": "Available",
+        "nonToxic": true
       }
     ],
     "7.62x39": [
@@ -1646,8 +1778,8 @@
         "productDetails": "FMJ 8g",
         "brand": "Sellier & Bellot",
         "quantity": "2000+ rounds",
-        "pricePerRound": "0.840€",
-        "total": "1 680.00€",
+        "pricePerRound": "0.750€",
+        "total": "1500.00€",
         "status": "Available"
       },
       {
