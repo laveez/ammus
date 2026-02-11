@@ -32,6 +32,13 @@ interface PriceResult {
   available: boolean | null
   nonToxic: boolean | null
   strategy: string
+  variants?: VariantInfo[]
+}
+
+interface VariantInfo {
+  qty: number
+  price: number
+  available: boolean
 }
 
 // --- Price extraction strategies ---
@@ -240,6 +247,34 @@ function isNonToxicByName(product: Product): boolean {
   return NON_TOXIC_PATTERN.test(text)
 }
 
+async function extractVariants(page: Page): Promise<VariantInfo[] | null> {
+  const raw = await page.evaluate(() => {
+    const text = document.body?.innerText || ''
+    const lines = text.split('\n').map(l => l.trim())
+    const variants: { qty: number; price: number; available: boolean }[] = []
+
+    for (let i = 0; i < lines.length; i++) {
+      const m = lines[i].match(/^Valitse\s+(\d+)\s*kpl$/i)
+      if (!m) continue
+      const qty = parseInt(m[1])
+      const priceLine = lines[i + 1] || ''
+      const pm = priceLine.match(/([\d\s]+[.,]\d{2})\s*€/)
+      if (!pm) continue
+      const price = parseFloat(pm[1].replace(/\s/g, '').replace(',', '.'))
+      if (isNaN(price) || price <= 0) continue
+
+      let available = true
+      for (let j = i + 2; j < Math.min(i + 5, lines.length); j++) {
+        if (/tilapäisesti loppu|loppunut/i.test(lines[j])) { available = false; break }
+        if (/^heti|saatavilla/i.test(lines[j])) { break }
+      }
+      variants.push({ qty, price, available })
+    }
+    return variants.length > 1 ? variants : null
+  })
+  return raw
+}
+
 async function extractPrice(page: Page): Promise<PriceResult> {
   // Try server-rendered strategies first (no SPA wait needed)
   const fastStrategies = [tryJsonLd, tryMetaTags, tryDomSelectors, tryJsVariables]
@@ -248,6 +283,7 @@ async function extractPrice(page: Page): Promise<PriceResult> {
     if (result.price !== null) {
       if (result.available === null) result.available = await extractAvailability(page)
       result.nonToxic = await extractNonToxic(page)
+      result.variants = await extractVariants(page) ?? undefined
       return result
     }
   }
@@ -259,6 +295,7 @@ async function extractPrice(page: Page): Promise<PriceResult> {
     if (result.price !== null) {
       if (result.available === null) result.available = await extractAvailability(page)
       result.nonToxic = await extractNonToxic(page)
+      result.variants = await extractVariants(page) ?? undefined
       return result
     }
   }
@@ -268,6 +305,7 @@ async function extractPrice(page: Page): Promise<PriceResult> {
   if (textResult.price !== null) {
     textResult.available = await extractAvailability(page)
     textResult.nonToxic = await extractNonToxic(page)
+    textResult.variants = await extractVariants(page) ?? undefined
     return textResult
   }
 
@@ -336,7 +374,8 @@ async function main() {
       if (result.price !== null) {
         const availStr = result.available === true ? 'In Stock' : result.available === false ? 'Out of Stock' : '?'
         const ntStr = result.nonToxic === true ? ' [NT]' : ''
-        console.log(`[${completed}/${urls.length}] ${domain} → ${result.price.toFixed(2)}€ [${availStr}]${ntStr} (${result.strategy})`)
+        const varStr = result.variants ? ` (${result.variants.length} variants)` : ''
+        console.log(`[${completed}/${urls.length}] ${domain} → ${result.price.toFixed(2)}€ [${availStr}]${ntStr} (${result.strategy})${varStr}`)
         succeeded++
       } else {
         console.log(`[${completed}/${urls.length}] ${domain} → FAILED`)
@@ -379,35 +418,10 @@ async function main() {
     byUrl.set(entry.product.url, list)
   }
 
-  // Apply corrections to ALL entries per URL.
-  //
-  // Key insight: the quantity field from patruunat.fi sometimes shows box counts
-  // (e.g., "1+" = 1 box, "20+" = 20 boxes) instead of round counts. But the
-  // pricePerRound was always calculated using actual rounds. So for any entry:
-  //   actual_rounds = total / pricePerRound
-  // gives the real round count regardless of what "quantity" says.
-  //
-  // Strategy:
-  // 1. Find the entry whose total is closest to the scraped price (= base unit)
-  // 2. Determine rounds_per_box = base_entry.total / base_entry.pricePerRound
-  // 3. Calculate new_ppr = scraped_price / rounds_per_box
-  // 4. For ALL entries: derive their actual_rounds, then recalculate total + ppr
   let corrections = 0
   for (const [url, entries] of byUrl) {
     const result = results.get(url)
     if (!result) continue
-
-    // Update availability for all entries sharing this URL
-    if (result.available !== null) {
-      for (const { product } of entries) {
-        const newStatus = result.available ? 'Available' : 'Out of Stock'
-        if (product.status !== newStatus) {
-          console.log(`  ${product.retailer} | ${product.productName} — status: ${product.status} → ${newStatus}`)
-          product.status = newStatus
-          corrections++
-        }
-      }
-    }
 
     // Update non-toxic status: page-level detection OR product name match
     for (const { product } of entries) {
@@ -416,6 +430,50 @@ async function main() {
         console.log(`  ${product.retailer} | ${product.productName} — non-toxic: detected`)
         product.nonToxic = true
         corrections++
+      }
+    }
+
+    // Per-variant update: each variant has its own price + availability
+    if (result.variants && result.variants.length > 0) {
+      for (const { product } of entries) {
+        const qtyNum = parseQuantity(product.quantity)
+        const variant = result.variants.find(v => v.qty === qtyNum)
+        if (!variant) continue
+
+        const newStatus = variant.available ? 'Available' : 'Out of Stock'
+        if (product.status !== newStatus) {
+          console.log(`  ${product.retailer} | ${product.productName} (${product.quantity}) — status: ${product.status} → ${newStatus}`)
+          product.status = newStatus
+          corrections++
+        }
+
+        const newPPR = variant.price / variant.qty
+        const oldPPR = parseFloat(product.pricePerRound.replace('€', ''))
+        const oldTotal = parseFloat(product.total.replace('€', '').replace(/\s/g, ''))
+        const pprChanged = Math.abs(oldPPR - newPPR) > 0.0005
+        const totalChanged = Math.abs(oldTotal - variant.price) > 0.01
+
+        if (pprChanged || totalChanged) {
+          console.log(`  ${product.retailer} | ${product.productName} (${product.quantity})`)
+          if (totalChanged) console.log(`    total: ${product.total} → ${formatPrice(variant.price)}`)
+          if (pprChanged) console.log(`    €/round: ${product.pricePerRound} → ${formatPricePerRound(newPPR)}`)
+          product.total = formatPrice(variant.price)
+          product.pricePerRound = formatPricePerRound(newPPR)
+          corrections++
+        }
+      }
+      continue
+    }
+
+    // Single-price update: one price + availability per URL
+    if (result.available !== null) {
+      for (const { product } of entries) {
+        const newStatus = result.available ? 'Available' : 'Out of Stock'
+        if (product.status !== newStatus) {
+          console.log(`  ${product.retailer} | ${product.productName} — status: ${product.status} → ${newStatus}`)
+          product.status = newStatus
+          corrections++
+        }
       }
     }
 
@@ -441,29 +499,24 @@ async function main() {
     if (basePPR <= 0 || baseTotal <= 0) continue
     const roundsPerBox = Math.round(baseTotal / basePPR)
     if (roundsPerBox < 10) {
-      // No ammo comes in boxes of less than 10 — likely bad data (e.g. PPR = box price)
       const domain = new URL(url).hostname.replace('www.', '')
       console.log(`  SKIP ${domain} — roundsPerBox=${roundsPerBox} (bad base data)`)
       continue
     }
 
-    // New price per round from scraped data
     const newPPR = scrapedPrice / roundsPerBox
 
-    // Update all entries for this URL
     for (const { product } of entries) {
       const oldPPR = parseFloat(product.pricePerRound.replace('€', ''))
       const oldTotal = parseFloat(product.total.replace('€', '').replace(/\s/g, ''))
       if (oldPPR <= 0 || oldTotal <= 0) continue
 
-      // Sanity check: reject corrections where PPR changes by more than 3x
       const pprRatio = newPPR / oldPPR
       if (pprRatio > 3 || pprRatio < 1 / 3) {
         console.log(`  SKIP ${product.retailer} | ${product.productName} — PPR change too large (${oldPPR.toFixed(3)} → ${newPPR.toFixed(3)}, ${pprRatio.toFixed(1)}x)`)
         continue
       }
 
-      // Actual rounds this entry covers (derived from its own total/ppr ratio)
       const actualRounds = Math.round(oldTotal / oldPPR)
       if (actualRounds <= 0) continue
 
@@ -475,7 +528,6 @@ async function main() {
         console.log(`  ${product.retailer} | ${product.productName} (${product.quantity})`)
         if (totalChanged) console.log(`    total: ${product.total} → ${formatPrice(newTotal)}`)
         if (pprChanged) console.log(`    €/round: ${product.pricePerRound} → ${formatPricePerRound(newPPR)}`)
-
         product.total = formatPrice(newTotal)
         product.pricePerRound = formatPricePerRound(newPPR)
         corrections++

@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "fetch-prices": "tsx scripts/fetch-prices.ts"
+    "fetch-prices": "tsx scripts/fetch-prices.ts",
+    "discover-variants": "tsx scripts/discover-variants.ts"
   },
   "dependencies": {
     "react": "^19.2.0",

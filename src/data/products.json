@@ -125,9 +125,9 @@
         "productDetails": "FMJ 7.5g",
         "brand": "Sellier & Bellot",
         "quantity": "1000+ rounds",
-        "pricePerRound": "0.320€",
-        "total": "319.16€",
-        "status": "Out of Stock"
+        "pricePerRound": "0.310€",
+        "total": "309.90€",
+        "status": "Available"
       },
       {
         "url": "https://www.ruoto.fi/metsastys/geco-fmj-9mm-luger-8-0g-pistoolinpatruuna-9mm-luger-50kpl/p/4000294186295/",
@@ -136,8 +136,8 @@
         "productDetails": "FMJ 8.0g",
         "brand": "Geco",
         "quantity": "1000+ rounds",
-        "pricePerRound": "0.340€",
-        "total": "339.12€",
+        "pricePerRound": "0.310€",
+        "total": "309.90€",
         "status": "Available"
       },
       {
@@ -147,8 +147,8 @@
         "productDetails": "FMJ 8.0g",
         "brand": "Sellier & Bellot",
         "quantity": "5000+ rounds",
-        "pricePerRound": "0.360€",
-        "total": "1 800.00€",
+        "pricePerRound": "0.304€",
+        "total": "1520.00€",
         "status": "Available"
       },
       {
@@ -169,8 +169,8 @@
         "productDetails": "FMJ 8.0g",
         "brand": "Sellier & Bellot",
         "quantity": "1000+ rounds",
-        "pricePerRound": "0.360€",
-        "total": "360.00€",
+        "pricePerRound": "0.315€",
+        "total": "315.00€",
         "status": "Available"
       },
       {
@@ -204,7 +204,7 @@
         "quantity": "50+ rounds",
         "pricePerRound": "0.320€",
         "total": "15.99€",
-        "status": "Out of Stock"
+        "status": "Available"
       },
       {
         "url": "https://www.ruoto.fi/metsastys/sb-9mm-luger-fmj-8-0g-pistoolin-patruuna-9mm-luger-50kpl/p/8590690315208/8590690315208/",
@@ -376,6 +376,41 @@
         "pricePerRound": "0.458€",
         "total": "22.90€",
         "status": "Out of Stock",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.ruoto.fi/metsastys/sb-9mm-luger-fmj-8-0g-pistoolin-patruuna-9mm-luger-50kpl/p/8590690315208/8590690315208/",
+        "retailer": "Ruoto",
+        "productName": "Sellier & Bellot 9mm FMJ 8.0g Pistol Ammunition, 50 rounds",
+        "productDetails": "FMJ 8.0g",
+        "brand": "Sellier & Bellot",
+        "quantity": "1000",
+        "pricePerRound": "0.310€",
+        "total": "309.90€",
+        "status": "Available"
+      },
+      {
+        "url": "https://www.aawee.fi/fi/patruunat-ja-jalleenlataus/9x19-sellier-bellot-nontox-8-0g-tfmj-sellierbellot-9mm-luger-123gr-n-tox/p/V311562/",
+        "retailer": "Aawee",
+        "productName": "9x19 Sellier & Bellot NonTox 8,0g TFMJ",
+        "productDetails": "TFMJ 8g NonTox",
+        "brand": "Sellier & Bellot",
+        "quantity": "1000",
+        "pricePerRound": "0.369€",
+        "total": "369.00€",
+        "status": "Out of Stock",
+        "nonToxic": true
+      },
+      {
+        "url": "https://www.aawee.fi/fi/patruunat-ja-jalleenlataus/9x19-magtech-8g-clean-range-feb-magtech-cr9b-50kpl-clean-range/p/158127/",
+        "retailer": "Aawee",
+        "productName": "9x19 Magtech 8g Clean Range FEB",
+        "productDetails": "FEB 8g Clean Range",
+        "brand": "Magtech",
+        "quantity": "1000",
+        "pricePerRound": "0.399€",
+        "total": "399.00€",
+        "status": "Available",
         "nonToxic": true
       }
     ],
@@ -720,8 +755,8 @@
         "productDetails": "FMJ 3.6g",
         "brand": "Winchester",
         "quantity": "1000+ rounds",
-        "pricePerRound": "0.849€",
-        "total": "851.20€",
+        "pricePerRound": "0.850€",
+        "total": "849.50€",
         "status": "Available"
       },
       {
@@ -797,8 +832,8 @@
         "productDetails": "FMJ 3.56g",
         "brand": "Magtech",
         "quantity": "1000+ rounds",
-        "pricePerRound": "0.598€",
-        "total": "598.00€",
+        "pricePerRound": "0.569€",
+        "total": "569.00€",
         "status": "Available"
       },
       {
@@ -863,7 +898,7 @@
         "productDetails": "FMJ 3.6g",
         "brand": "Winchester",
         "quantity": "200+ rounds",
-        "pricePerRound": "0.849€",
+        "pricePerRound": "0.850€",
         "total": "169.90€",
         "status": "Available"
       },
@@ -1116,6 +1151,17 @@
         "total": "39.90€",
         "status": "Available",
         "nonToxic": true
+      },
+      {
+        "url": "https://www.ruoto.fi/metsastys/sb-fmj-223-rem-3-6g-kivaarin-ratapatruuna-223-rem-100kpl/p/8590690341870/",
+        "retailer": "Ruoto",
+        "productName": "Sellier & Bellot FMJ 223 Remington 3.6g",
+        "productDetails": "FMJ 3.6g",
+        "brand": "Sellier & Bellot",
+        "quantity": "20",
+        "pricePerRound": "1.499€",
+        "total": "29.99€",
+        "status": "Available"
       }
     ],
     "308 Winchester": [
@@ -1148,8 +1194,8 @@
         "productDetails": "FMJ 9.5g",
         "brand": "GGG",
         "quantity": "600+ rounds",
-        "pricePerRound": "1.245€",
-        "total": "747.00€",
+        "pricePerRound": "0.965€",
+        "total": "579.00€",
         "status": "Out of Stock"
       },
       {
@@ -1170,8 +1216,8 @@
         "productDetails": "FMJ 8.0g",
         "brand": "Sellier & Bellot",
         "quantity": "400+ rounds",
-        "pricePerRound": "1.180€",
-        "total": "473.18€",
+        "pricePerRound": "1.123€",
+        "total": "449.00€",
         "status": "Available"
       },
       {
@@ -1181,8 +1227,8 @@
         "productDetails": "FMJ 9.55g",
         "brand": "GGG",
         "quantity": "600+ rounds",
-        "pricePerRound": "1.200€",
-        "total": "716.10€",
+        "pricePerRound": "1.115€",
+        "total": "669.00€",
         "status": "Available"
       },
       {
@@ -1203,8 +1249,8 @@
         "productDetails": "FMJ 8.0g",
         "brand": "Sako",
         "quantity": "300+ rounds",
-        "pricePerRound": "1.200€",
-        "total": "361.14€",
+        "pricePerRound": "1.163€",
+        "total": "349.00€",
         "status": "Available"
       },
       {
@@ -1846,6 +1892,17 @@
         "quantity": "100+ rounds",
         "pricePerRound": "0.990€",
         "total": "99.00€",
+        "status": "Available"
+      },
+      {
+        "url": "https://www.aawee.fi/fi/patruunat-ja-jalleenlataus/7-62x39-sellierbellot-8g-123gr-fmj-sellierbellot-7-62x39-50kpl/p/V340842/",
+        "retailer": "Aawee",
+        "productName": "7.62x39 Sellier & Bellot 8g/123gr FMJ",
+        "productDetails": "FMJ 8g",
+        "brand": "Sellier & Bellot",
+        "quantity": "400",
+        "pricePerRound": "0.825€",
+        "total": "330.00€",
         "status": "Available"
       }
     ]
