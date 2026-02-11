@@ -58,7 +58,7 @@
         "productName": "Sellier & Bellot 9mm 8g FMJ 50 rounds pistol ammunition",
         "productDetails": "FMJ 8g",
         "brand": "Sellier & Bellot",
-        "quantity": "20",
+        "quantity": "1000",
         "pricePerRound": "0.338€",
         "total": "338.00€",
         "status": "Available"
@@ -234,7 +234,7 @@
         "productName": "Sellier & Bellot 9mm 8g FMJ 50 rounds pistol ammunition",
         "productDetails": "FMJ 8g",
         "brand": "Sellier & Bellot",
-        "quantity": "1",
+        "quantity": "50",
         "pricePerRound": "0.338€",
         "total": "16.90€",
         "status": "Available"
@@ -411,6 +411,39 @@
         "total": "399.00€",
         "status": "Available",
         "nonToxic": true
+      },
+      {
+        "url": "https://www.seponurheilujapatruuna.fi/tuote/geco-9mm-luger-fmj-flat-nose-10g/",
+        "retailer": "Seponurheilujapatruuna",
+        "productName": "Geco 9mm Luger FMJ Flat Nose 10g",
+        "productDetails": "FMJ Flat Nose 10g",
+        "brand": "Geco",
+        "quantity": "50",
+        "pricePerRound": "0.470€",
+        "total": "23.50€",
+        "status": "Out of Stock"
+      },
+      {
+        "url": "https://www.seponurheilujapatruuna.fi/tuote/sellier-bellot-9mm-luger-80g-fmj-bulk/",
+        "retailer": "Seponurheilujapatruuna",
+        "productName": "Sellier & Bellot 9mm Luger 8.0g FMJ Bulk 250kpl",
+        "productDetails": "FMJ 8g",
+        "brand": "Sellier & Bellot",
+        "quantity": "250",
+        "pricePerRound": "0.316€",
+        "total": "79.00€",
+        "status": "Out of Stock"
+      },
+      {
+        "url": "https://www.seponurheilujapatruuna.fi/tuote/sellier-bellot-9mm-luger-80g-fmj-bulk-2000-kpl/",
+        "retailer": "Seponurheilujapatruuna",
+        "productName": "Sellier & Bellot 9mm Luger 8.0g FMJ Bulk 1000kpl",
+        "productDetails": "FMJ 8g",
+        "brand": "Sellier & Bellot",
+        "quantity": "1000",
+        "pricePerRound": "0.298€",
+        "total": "298.00€",
+        "status": "Out of Stock"
       }
     ],
     "22 LR": [
@@ -420,7 +453,7 @@
         "productName": "Geco 22 LR LRN 2.6g 50 rounds",
         "productDetails": "LRN 2.6g",
         "brand": "Geco",
-        "quantity": "100",
+        "quantity": "5000",
         "pricePerRound": "0.118€",
         "total": "588.82€",
         "status": "Out of Stock"
@@ -530,7 +563,7 @@
         "productName": "Geco 22 LR LRN 2.6g 50 rounds",
         "productDetails": "LRN 2.6g",
         "brand": "Geco",
-        "quantity": "10",
+        "quantity": "500",
         "pricePerRound": "0.118€",
         "total": "59.00€",
         "status": "Out of Stock"
@@ -541,7 +574,7 @@
         "productName": "Geco 22 LR LRN 2.6g 50 rounds",
         "productDetails": "LRN 2.6g",
         "brand": "Geco",
-        "quantity": "1",
+        "quantity": "50",
         "pricePerRound": "0.118€",
         "total": "5.90€",
         "status": "Out of Stock"
@@ -983,7 +1016,7 @@
         "productName": "Sellier & Bellot 223 Remington FMJ 3.6g 55gr Bulk 100 rounds",
         "productDetails": "FMJ 3.6g 55gr",
         "brand": "Sellier & Bellot",
-        "quantity": "1",
+        "quantity": "100",
         "pricePerRound": "0.669€",
         "total": "66.90€",
         "status": "Available"
@@ -1162,7 +1195,7 @@
         "productName": "Sellier & Bellot 308 Winchester 8g FMJ 50 rounds",
         "productDetails": "FMJ 8g",
         "brand": "Sellier & Bellot",
-        "quantity": "8",
+        "quantity": "400",
         "pricePerRound": "0.940€",
         "total": "375.04€",
         "status": "Available"
@@ -1195,8 +1228,8 @@
         "productName": "Sellier & Bellot 308 Winchester 8g FMJ 50 rounds",
         "productDetails": "FMJ 8g",
         "brand": "Sellier & Bellot",
-        "quantity": "1",
-        "pricePerRound": "55.000€",
+        "quantity": "50",
+        "pricePerRound": "1.100€",
         "total": "55.00€",
         "status": "Available"
       },
