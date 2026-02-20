@@ -32,7 +32,7 @@ Compare ammunition prices across 25 Finnish online retailers — updated automat
 
 ## Screenshot
 
-![Ammus screenshot](patruunat-styled.png)
+![Ammus screenshot](ammus-screenshot.png)
 
 ## Quick Start
 
