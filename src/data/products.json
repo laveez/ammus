@@ -374,7 +374,7 @@
         "quantity": "50",
         "pricePerRound": "0.458€",
         "total": "22.90€",
-        "status": "Out of Stock",
+        "status": "Available",
         "nonToxic": true
       },
       {
@@ -421,7 +421,7 @@
         "quantity": "50",
         "pricePerRound": "0.470€",
         "total": "23.50€",
-        "status": "Out of Stock"
+        "status": "Available"
       },
       {
         "url": "https://www.seponurheilujapatruuna.fi/tuote/sellier-bellot-9mm-luger-80g-fmj-bulk/",
@@ -432,7 +432,7 @@
         "quantity": "250",
         "pricePerRound": "0.316€",
         "total": "79.00€",
-        "status": "Out of Stock"
+        "status": "Available"
       },
       {
         "url": "https://www.seponurheilujapatruuna.fi/tuote/sellier-bellot-9mm-luger-80g-fmj-bulk-2000-kpl/",
@@ -443,7 +443,7 @@
         "quantity": "1000",
         "pricePerRound": "0.298€",
         "total": "298.00€",
-        "status": "Out of Stock"
+        "status": "Available"
       }
     ],
     "22 LR": [
@@ -489,7 +489,7 @@
         "quantity": "500",
         "pricePerRound": "0.118€",
         "total": "58.88€",
-        "status": "Out of Stock"
+        "status": "Available"
       },
       {
         "url": "https://www.seponurheilujapatruuna.fi/tuote/norma-usa-tac-22-26g-5000-kpl/",
@@ -599,7 +599,7 @@
         "quantity": "50",
         "pricePerRound": "0.118€",
         "total": "5.90€",
-        "status": "Out of Stock"
+        "status": "Available"
       },
       {
         "url": "https://www.ruoto.fi/metsastys/norma-tac-22-22-lr-2-6g-pienoiskivaarin-patruuna-22-lr-50kpl/p/2318716/",
@@ -764,8 +764,8 @@
         "productDetails": "FMJ 55gr",
         "brand": "STV Scorpio",
         "quantity": "6000",
-        "pricePerRound": "0.522€",
-        "total": "3129.00€",
+        "pricePerRound": "0.521€",
+        "total": "3 129.00€",
         "status": "Available"
       },
       {
@@ -775,8 +775,8 @@
         "productDetails": "FMJ 55gr",
         "brand": "STV Scorpio",
         "quantity": "2000",
-        "pricePerRound": "0.535€",
-        "total": "1069.00€",
+        "pricePerRound": "0.534€",
+        "total": "1 069.00€",
         "status": "Available"
       },
       {
@@ -1159,9 +1159,9 @@
         "productDetails": "Naturalis 3.2g",
         "brand": "Lapua",
         "quantity": "20",
-        "pricePerRound": "3.500€",
+        "pricePerRound": "3.499€",
         "total": "69.99€",
-        "status": "Available",
+        "status": "Out of Stock",
         "nonToxic": true
       },
       {
@@ -1196,8 +1196,8 @@
         "productDetails": "FMJ 8g",
         "brand": "Sellier & Bellot",
         "quantity": "400",
-        "pricePerRound": "0.940€",
-        "total": "375.04€",
+        "pricePerRound": "1.100€",
+        "total": "438.90€",
         "status": "Available"
       },
       {
@@ -1297,7 +1297,7 @@
         "quantity": "50",
         "pricePerRound": "1.178€",
         "total": "58.90€",
-        "status": "Out of Stock"
+        "status": "Available"
       },
       {
         "url": "https://viranomainen.fi/p46067/sellier-bellot-308-win-fmj-8-0g-harjoituspatruuna-50kpl",
@@ -1350,8 +1350,8 @@
         "productDetails": "FMJ 8.0g",
         "brand": "Sako",
         "quantity": "50",
-        "pricePerRound": "1.200€",
-        "total": "59.99€",
+        "pricePerRound": "1.198€",
+        "total": "59.90€",
         "status": "Available"
       },
       {
@@ -1737,7 +1737,7 @@
         "quantity": "20",
         "pricePerRound": "3.995€",
         "total": "79.90€",
-        "status": "Available",
+        "status": "Out of Stock",
         "nonToxic": true
       },
       {
@@ -1749,7 +1749,7 @@
         "quantity": "20",
         "pricePerRound": "3.995€",
         "total": "79.90€",
-        "status": "Available",
+        "status": "Out of Stock",
         "nonToxic": true
       },
       {
@@ -1761,7 +1761,7 @@
         "quantity": "20",
         "pricePerRound": "3.865€",
         "total": "77.30€",
-        "status": "Available",
+        "status": "Out of Stock",
         "nonToxic": true
       }
     ],
