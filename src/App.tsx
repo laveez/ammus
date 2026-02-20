@@ -2,6 +2,7 @@ import {useCallback, useState} from 'react';
 import {CaliberTabs} from './components/CaliberTabs';
 import type {Filters} from './components/FilterBar';
 import {defaultFilters, FilterBar} from './components/FilterBar';
+import {Footer} from './components/Footer';
 import {Header} from './components/Header';
 import {PriceTable} from './components/PriceTable';
 import data from './data/products.json';
@@ -37,6 +38,7 @@ function App() {
       />
       <FilterBar products={products} filters={filters} onChange={setFilters} />
       <PriceTable products={products} filters={filters} />
+      <Footer />
     </div>
   );
 }
