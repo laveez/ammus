@@ -4,10 +4,10 @@ interface CaliberTabsProps {
   onChange: (caliber: string) => void
 }
 
-export function CaliberTabs({ calibers, active, onChange }: CaliberTabsProps) {
+export function CaliberTabs({calibers, active, onChange}: CaliberTabsProps) {
   return (
     <nav className="tabs">
-      {calibers.map((caliber) => (
+      {calibers.map(caliber => (
         <button
           key={caliber}
           className={`tab-button${caliber === active ? ' active' : ''}`}
@@ -17,5 +17,5 @@ export function CaliberTabs({ calibers, active, onChange }: CaliberTabsProps) {
         </button>
       ))}
     </nav>
-  )
+  );
 }

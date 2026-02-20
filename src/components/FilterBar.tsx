@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useMemo } from 'react'
+import {useEffect, useMemo, useRef, useState} from 'react';
 
 export interface Filters {
   nonToxicOnly: boolean
@@ -9,6 +9,7 @@ export interface Filters {
   maxQuantity: number | null
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const defaultFilters: Filters = {
   nonToxicOnly: false,
   inStockOnly: false,
@@ -16,7 +17,7 @@ export const defaultFilters: Filters = {
   brands: [],
   maxPricePerRound: null,
   maxQuantity: null,
-}
+};
 
 interface Product {
   retailer: string
@@ -33,31 +34,31 @@ interface FilterBarProps {
   onChange: (filters: Filters) => void
 }
 
-function MultiSelect({ label, options, selected, onChange }: {
+function MultiSelect({label, options, selected, onChange}: {
   label: string
   options: string[]
   selected: string[]
   onChange: (selected: string[]) => void
 }) {
-  const [open, setOpen] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!open) return
+    if (!open) return;
     const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
-    }
-    document.addEventListener('mousedown', handler)
-    return () => document.removeEventListener('mousedown', handler)
-  }, [open])
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [open]);
 
   const toggle = (value: string) => {
-    onChange(selected.includes(value)
-      ? selected.filter(v => v !== value)
-      : [...selected, value])
-  }
+    onChange(selected.includes(value) ?
+      selected.filter(v => v !== value) :
+      [...selected, value]);
+  };
 
-  const buttonLabel = selected.length > 0 ? `${label} (${selected.length})` : label
+  const buttonLabel = selected.length > 0 ? `${label} (${selected.length})` : label;
 
   return (
     <div className="multi-select" ref={ref}>
@@ -84,21 +85,21 @@ function MultiSelect({ label, options, selected, onChange }: {
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export function FilterBar({ products, filters, onChange }: FilterBarProps) {
+export function FilterBar({products, filters, onChange}: FilterBarProps) {
   const retailers = useMemo(() =>
     [...new Set(products.map(p => p.retailer))].sort()
-  , [products])
+  , [products]);
 
   const brands = useMemo(() =>
     [...new Set(products.map(p => p.brand))].sort()
-  , [products])
+  , [products]);
 
   const update = <K extends keyof Filters>(key: K, value: Filters[K]) => {
-    onChange({ ...filters, [key]: value })
-  }
+    onChange({...filters, [key]: value});
+  };
 
   return (
     <div className="filter-bar">
@@ -148,5 +149,5 @@ export function FilterBar({ products, filters, onChange }: FilterBarProps) {
         onChange={e => update('maxQuantity', e.target.value ? parseInt(e.target.value) : null)}
       />
     </div>
-  )
+  );
 }

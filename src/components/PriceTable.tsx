@@ -1,5 +1,5 @@
-import { useState, useMemo } from 'react'
-import type { Filters } from './FilterBar'
+import {useMemo, useState} from 'react';
+import type {Filters} from './FilterBar';
 
 interface Product {
   url: string
@@ -18,34 +18,34 @@ type SortColumn = 'retailer' | 'product' | 'brand' | 'type' | 'quantity' | 'per-
 type SortDirection = 'asc' | 'desc'
 
 const columns: { key: SortColumn; label: string }[] = [
-  { key: 'retailer', label: 'Retailer' },
-  { key: 'product', label: 'Product' },
-  { key: 'brand', label: 'Brand' },
-  { key: 'type', label: 'Type' },
-  { key: 'quantity', label: 'Quantity' },
-  { key: 'per-unit', label: '€/Round' },
-  { key: 'total', label: 'Total' },
-  { key: 'status', label: 'Status' },
-]
+  {key: 'retailer', label: 'Retailer'},
+  {key: 'product', label: 'Product'},
+  {key: 'brand', label: 'Brand'},
+  {key: 'type', label: 'Type'},
+  {key: 'quantity', label: 'Quantity'},
+  {key: 'per-unit', label: '€/Round'},
+  {key: 'total', label: 'Total'},
+  {key: 'status', label: 'Status'},
+];
 
 function parsePrice(s: string): number {
-  return parseFloat(s.replace('€', '').replace(/\s/g, '')) || 0
+  return parseFloat(s.replace('€', '').replace(/\s/g, '')) || 0;
 }
 
 function parseQuantity(s: string): number {
-  return parseInt(s.replace(/[^\d]/g, '')) || 0
+  return parseInt(s.replace(/[^\d]/g, '')) || 0;
 }
 
 function getSortValue(product: Product, column: SortColumn): number | string {
   switch (column) {
-    case 'per-unit': return parsePrice(product.pricePerRound)
-    case 'total': return parsePrice(product.total)
-    case 'quantity': return parseQuantity(product.quantity)
-    case 'status': return product.status === 'Available' ? 0 : 1
-    case 'retailer': return product.retailer.toLowerCase()
-    case 'product': return product.productName.toLowerCase()
-    case 'type': return product.nonToxic === true ? 0 : 1
-    case 'brand': return product.brand.toLowerCase()
+  case 'per-unit': return parsePrice(product.pricePerRound);
+  case 'total': return parsePrice(product.total);
+  case 'quantity': return parseQuantity(product.quantity);
+  case 'status': return product.status === 'Available' ? 0 : 1;
+  case 'retailer': return product.retailer.toLowerCase();
+  case 'product': return product.productName.toLowerCase();
+  case 'type': return product.nonToxic === true ? 0 : 1;
+  case 'brand': return product.brand.toLowerCase();
   }
 }
 
@@ -54,63 +54,63 @@ interface PriceTableProps {
   filters: Filters
 }
 
-export function PriceTable({ products, filters }: PriceTableProps) {
-  const [sortColumn, setSortColumn] = useState<SortColumn>('per-unit')
-  const [sortDirection, setSortDirection] = useState<SortDirection>('asc')
+export function PriceTable({products, filters}: PriceTableProps) {
+  const [sortColumn, setSortColumn] = useState<SortColumn>('per-unit');
+  const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
 
   const handleSort = (column: SortColumn) => {
     if (sortColumn === column) {
-      setSortDirection(d => d === 'asc' ? 'desc' : 'asc')
+      setSortDirection(d => d === 'asc' ? 'desc' : 'asc');
     } else {
-      setSortColumn(column)
-      setSortDirection('asc')
+      setSortColumn(column);
+      setSortDirection('asc');
     }
-  }
+  };
 
   const filtered = useMemo(() =>
     products.filter(p => {
-      if (filters.nonToxicOnly && p.nonToxic !== true) return false
-      if (filters.inStockOnly && p.status !== 'Available') return false
-      if (filters.retailers.length > 0 && !filters.retailers.includes(p.retailer)) return false
-      if (filters.brands.length > 0 && !filters.brands.includes(p.brand)) return false
-      if (filters.maxPricePerRound != null && parsePrice(p.pricePerRound) > filters.maxPricePerRound) return false
-      if (filters.maxQuantity != null && parseQuantity(p.quantity) > filters.maxQuantity) return false
-      return true
+      if (filters.nonToxicOnly && p.nonToxic !== true) return false;
+      if (filters.inStockOnly && p.status !== 'Available') return false;
+      if (filters.retailers.length > 0 && !filters.retailers.includes(p.retailer)) return false;
+      if (filters.brands.length > 0 && !filters.brands.includes(p.brand)) return false;
+      if (filters.maxPricePerRound != null && parsePrice(p.pricePerRound) > filters.maxPricePerRound) return false;
+      if (filters.maxQuantity != null && parseQuantity(p.quantity) > filters.maxQuantity) return false;
+      return true;
     })
-  , [products, filters])
+  , [products, filters]);
 
   const sorted = useMemo(() => {
-    const copy = [...filtered]
+    const copy = [...filtered];
     copy.sort((a, b) => {
-      const aVal = getSortValue(a, sortColumn)
-      const bVal = getSortValue(b, sortColumn)
-      let result = 0
-      if (aVal < bVal) result = -1
-      else if (aVal > bVal) result = 1
-      return sortDirection === 'desc' ? -result : result
-    })
-    return copy
-  }, [filtered, sortColumn, sortDirection])
+      const aVal = getSortValue(a, sortColumn);
+      const bVal = getSortValue(b, sortColumn);
+      let result = 0;
+      if (aVal < bVal) result = -1;
+      else if (aVal > bVal) result = 1;
+      return sortDirection === 'desc' ? -result : result;
+    });
+    return copy;
+  }, [filtered, sortColumn, sortDirection]);
 
   const bestPrice = useMemo(() => {
-    let best = Infinity
+    let best = Infinity;
     for (const p of filtered) {
-      const price = parsePrice(p.pricePerRound)
-      if (price > 0 && price < best) best = price
+      const price = parsePrice(p.pricePerRound);
+      if (price > 0 && price < best) best = price;
     }
-    return best
-  }, [filtered])
+    return best;
+  }, [filtered]);
 
   const handleRowClick = (url: string) => {
-    if (url) window.open(url, '_blank', 'noopener,noreferrer')
-  }
+    if (url) window.open(url, '_blank', 'noopener,noreferrer');
+  };
 
   if (filtered.length === 0) {
     return (
       <div className="table-container">
         <p className="empty-state">No products match the current filters.</p>
       </div>
-    )
+    );
   }
 
   return (
@@ -135,8 +135,8 @@ export function PriceTable({ products, filters }: PriceTableProps) {
         </thead>
         <tbody>
           {sorted.map((product, i) => {
-            const price = parsePrice(product.pricePerRound)
-            const isBest = Math.abs(price - bestPrice) < 0.001
+            const price = parsePrice(product.pricePerRound);
+            const isBest = Math.abs(price - bestPrice) < 0.001;
             return (
               <tr
                 key={i}
@@ -165,10 +165,10 @@ export function PriceTable({ products, filters }: PriceTableProps) {
                   </span>
                 </td>
               </tr>
-            )
+            );
           })}
         </tbody>
       </table>
     </div>
-  )
+  );
 }

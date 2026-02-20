@@ -1,12 +1,32 @@
 {
-  "name": "patruuna-scaffold",
-  "private": true,
-  "version": "0.0.0",
+  "name": "ammus",
+  "version": "1.0.0",
+  "description": "Ammo price comparison for Finnish retailers — 25 stores, 5 calibers, updated automatically",
+  "author": "laveez",
+  "license": "MIT",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/laveez/ammus.git"
+  },
+  "bugs": "https://github.com/laveez/ammus/issues",
+  "homepage": "https://laveez.github.io/ammus/",
+  "keywords": [
+    "ammo",
+    "ammunition",
+    "price-comparison",
+    "finland",
+    "scraper",
+    "react"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "preview": "vite preview",
     "fetch-prices": "tsx scripts/fetch-prices.ts",
     "discover-variants": "tsx scripts/discover-variants.ts"
@@ -24,6 +44,7 @@
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
     "globals": "^16.5.0",
     "playwright": "^1.58.2",
     "tsx": "^4.21.0",
