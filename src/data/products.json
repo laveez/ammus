@@ -17,7 +17,7 @@
         "quantity": "2000",
         "pricePerRound": "0.290€",
         "total": "580.00€",
-        "status": "Available"
+        "status": "Out of Stock"
       },
       {
         "url": "https://www.aawee.fi/fi/patruunat-ja-jalleenlataus/9x19-scorpio-124gr-8g-fmj-pistoolinpatruuna-stv-scorpio-patruuna-50kpl-rasia-1000kpl-laatikko/p/V00015-50/",
@@ -28,7 +28,7 @@
         "quantity": "6000",
         "pricePerRound": "0.285€",
         "total": "1710.00€",
-        "status": "Available"
+        "status": "Out of Stock"
       },
       {
         "url": "https://www.asepajamvuorela.fi/kauppa/patruunat/pistoolin-patruunat/geco-9mm-luger-geco-fmj-8-g-tomback-jacket-50-kpl/",
@@ -72,7 +72,7 @@
         "quantity": "1000",
         "pricePerRound": "0.299€",
         "total": "299.00€",
-        "status": "Available"
+        "status": "Out of Stock"
       },
       {
         "url": "https://www.greentrail.fi/aseet-ja-patruunat/geco-9mm-luger-8g-fmj-50-ptr-ltk-pistoolinpatruuna/p/4000294186295/",
@@ -125,8 +125,8 @@
         "productDetails": "FMJ 7.5g",
         "brand": "Sellier & Bellot",
         "quantity": "1000",
-        "pricePerRound": "0.310€",
-        "total": "309.90€",
+        "pricePerRound": "0.800€",
+        "total": "799.80€",
         "status": "Available"
       },
       {
@@ -160,7 +160,7 @@
         "quantity": "1000",
         "pricePerRound": "0.309€",
         "total": "309.00€",
-        "status": "Out of Stock"
+        "status": "Available"
       },
       {
         "url": "https://www.asejaera.fi/asekauppa/9mm-luger-fmj-sellier-bellot-8g-pistoolinpatruuna-ysimillista/p/8590690310494/",
@@ -202,8 +202,8 @@
         "productDetails": "FMJ 7.5g",
         "brand": "Sellier & Bellot",
         "quantity": "50",
-        "pricePerRound": "0.320€",
-        "total": "15.99€",
+        "pricePerRound": "0.800€",
+        "total": "39.99€",
         "status": "Available"
       },
       {
@@ -281,7 +281,7 @@
         "quantity": "50",
         "pricePerRound": "0.358€",
         "total": "17.90€",
-        "status": "Out of Stock"
+        "status": "Available"
       },
       {
         "url": "https://www.asejaera.fi/asekauppa/9mm-luger-fmj-sellier-bellot-8g-pistoolinpatruuna-ysimillista/p/8590690310494/",
@@ -326,7 +326,7 @@
         "quantity": "50",
         "pricePerRound": "0.390€",
         "total": "19.50€",
-        "status": "Available",
+        "status": "Out of Stock",
         "nonToxic": true
       },
       {
@@ -454,8 +454,8 @@
         "productDetails": "LRN 2.6g",
         "brand": "Geco",
         "quantity": "5000",
-        "pricePerRound": "0.118€",
-        "total": "588.82€",
+        "pricePerRound": "0.120€",
+        "total": "597.80€",
         "status": "Out of Stock"
       },
       {
@@ -487,8 +487,8 @@
         "productDetails": "LRN 2.6g",
         "brand": "Norma",
         "quantity": "500",
-        "pricePerRound": "0.118€",
-        "total": "58.88€",
+        "pricePerRound": "0.120€",
+        "total": "59.78€",
         "status": "Available"
       },
       {
@@ -564,8 +564,8 @@
         "productDetails": "LRN 2.6g",
         "brand": "Geco",
         "quantity": "500",
-        "pricePerRound": "0.118€",
-        "total": "59.00€",
+        "pricePerRound": "0.120€",
+        "total": "59.90€",
         "status": "Out of Stock"
       },
       {
@@ -575,8 +575,8 @@
         "productDetails": "LRN 2.6g",
         "brand": "Geco",
         "quantity": "50",
-        "pricePerRound": "0.118€",
-        "total": "5.90€",
+        "pricePerRound": "0.120€",
+        "total": "5.99€",
         "status": "Out of Stock"
       },
       {
@@ -597,8 +597,8 @@
         "productDetails": "LRN 2.6g",
         "brand": "Norma",
         "quantity": "50",
-        "pricePerRound": "0.118€",
-        "total": "5.90€",
+        "pricePerRound": "0.120€",
+        "total": "5.99€",
         "status": "Available"
       },
       {
@@ -619,8 +619,8 @@
         "productDetails": "Semi-Auto 2.6g",
         "brand": "Geco",
         "quantity": "50",
-        "pricePerRound": "0.110€",
-        "total": "5.50€",
+        "pricePerRound": "0.120€",
+        "total": "5.99€",
         "status": "Available"
       },
       {
@@ -665,7 +665,7 @@
         "quantity": "5000",
         "pricePerRound": "0.132€",
         "total": "659.00€",
-        "status": "Available"
+        "status": "Out of Stock"
       },
       {
         "url": "https://www.ruoto.fi/metsastys/remington-golden-bullet-hv-2-3g-hp-525pcs-pienoiskivaarin-patruuna-22-lr-525kpl/p/147700009190/",
@@ -674,8 +674,8 @@
         "productDetails": "HP 2.3g",
         "brand": "Remington",
         "quantity": "525",
-        "pricePerRound": "0.133€",
-        "total": "69.99€",
+        "pricePerRound": "0.076€",
+        "total": "39.99€",
         "status": "Available"
       },
       {
@@ -696,8 +696,8 @@
         "productDetails": "LRN 2.46g",
         "brand": "CCI",
         "quantity": "425",
-        "pricePerRound": "0.141€",
-        "total": "59.99€",
+        "pricePerRound": "0.094€",
+        "total": "39.99€",
         "status": "Out of Stock"
       },
       {
@@ -907,8 +907,8 @@
         "productDetails": "FMJ 3.6g",
         "brand": "Sellier & Bellot",
         "quantity": "50",
-        "pricePerRound": "0.600€",
-        "total": "29.99€",
+        "pricePerRound": "0.800€",
+        "total": "39.99€",
         "status": "Available"
       },
       {
@@ -918,8 +918,8 @@
         "productDetails": "FMJ 3.6g",
         "brand": "Sellier & Bellot",
         "quantity": "100",
-        "pricePerRound": "0.600€",
-        "total": "59.99€",
+        "pricePerRound": "0.800€",
+        "total": "79.98€",
         "status": "Available"
       },
       {
@@ -940,8 +940,8 @@
         "productDetails": "FMJ 3.6g",
         "brand": "Sellier & Bellot",
         "quantity": "800",
-        "pricePerRound": "0.600€",
-        "total": "479.92€",
+        "pricePerRound": "0.800€",
+        "total": "639.84€",
         "status": "Available"
       },
       {
@@ -1061,8 +1061,8 @@
         "productDetails": "FMJ 3.6g",
         "brand": "Sellier & Bellot",
         "quantity": "39",
-        "pricePerRound": "0.600€",
-        "total": "23.40€",
+        "pricePerRound": "0.800€",
+        "total": "31.19€",
         "status": "Available"
       },
       {
@@ -1183,8 +1183,8 @@
         "productDetails": "FMJ 3.6g",
         "brand": "Sellier & Bellot",
         "quantity": "20",
-        "pricePerRound": "1.499€",
-        "total": "29.99€",
+        "pricePerRound": "0.800€",
+        "total": "16.00€",
         "status": "Available"
       }
     ],
@@ -1209,7 +1209,7 @@
         "quantity": "500",
         "pricePerRound": "1.020€",
         "total": "510.00€",
-        "status": "Out of Stock"
+        "status": "Available"
       },
       {
         "url": "https://www.metsoase.fi/kivaarit/ggg-nato-308win-9-5g-fmj-kivaarin-patruuna/p/4779032300193/",
@@ -1218,8 +1218,8 @@
         "productDetails": "FMJ 9.5g",
         "brand": "GGG",
         "quantity": "600",
-        "pricePerRound": "0.965€",
-        "total": "579.00€",
+        "pricePerRound": "1.265€",
+        "total": "759.00€",
         "status": "Out of Stock"
       },
       {
@@ -1264,7 +1264,7 @@
         "quantity": "20",
         "pricePerRound": "1.145€",
         "total": "22.90€",
-        "status": "Out of Stock"
+        "status": "Available"
       },
       {
         "url": "https://www.metsoase.fi/kivaarit/sako-range-308win-fmj-8-0g-kivaarin-patruuna-speedhead-120a/p/6438053999974/",
@@ -1372,8 +1372,8 @@
         "productDetails": "FMJ 9.5g",
         "brand": "GGG",
         "quantity": "20",
-        "pricePerRound": "1.245€",
-        "total": "24.90€",
+        "pricePerRound": "1.295€",
+        "total": "25.90€",
         "status": "Out of Stock"
       },
       {
