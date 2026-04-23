@@ -83,7 +83,7 @@
         "quantity": "1000",
         "pricePerRound": "0.338€",
         "total": "338.00€",
-        "status": "Out of Stock"
+        "status": "Available"
       },
       {
         "url": "https://www.sissos.fi/metsastys/geco-9mm-luger-8g-fmj-1000ptr-ltk-9x19mm-pistoolinpatruuna/p/10723364148429/",
@@ -105,7 +105,7 @@
         "quantity": "2000",
         "pricePerRound": "0.300€",
         "total": "599.00€",
-        "status": "Out of Stock"
+        "status": "Available"
       },
       {
         "url": "https://www.ahtihuvila.fi/cgi-bin/webio2kauppa?Patruunat/Pistooli/S&B_9_mm_Luger_FMJ_8_g_1000_kpl&naytasivu=7452&id=0&saitti=ahtihuvila",
@@ -259,7 +259,7 @@
         "quantity": "50",
         "pricePerRound": "0.338€",
         "total": "16.90€",
-        "status": "Out of Stock"
+        "status": "Available"
       },
       {
         "url": "https://viranomainen.fi/p116908/sellier-bellot-9mm-8-0g-50kpl",
@@ -397,7 +397,7 @@
         "quantity": "1000",
         "pricePerRound": "0.369€",
         "total": "369.00€",
-        "status": "Out of Stock",
+        "status": "Available",
         "nonToxic": true
       },
       {
@@ -455,7 +455,7 @@
         "brand": "Geco",
         "quantity": "5000",
         "pricePerRound": "0.120€",
-        "total": "596.84€",
+        "total": "595.89€",
         "status": "Out of Stock"
       },
       {
@@ -488,7 +488,7 @@
         "brand": "Norma",
         "quantity": "500",
         "pricePerRound": "0.120€",
-        "total": "59.66€",
+        "total": "59.54€",
         "status": "Available"
       },
       {
@@ -522,7 +522,7 @@
         "quantity": "500",
         "pricePerRound": "0.102€",
         "total": "50.90€",
-        "status": "Available"
+        "status": "Out of Stock"
       },
       {
         "url": "https://viranomainen.fi/p93719/norma-tac-22-50-kpl",
@@ -565,7 +565,7 @@
         "brand": "Geco",
         "quantity": "500",
         "pricePerRound": "0.120€",
-        "total": "59.78€",
+        "total": "59.66€",
         "status": "Out of Stock"
       },
       {
@@ -665,7 +665,7 @@
         "quantity": "5000",
         "pricePerRound": "0.132€",
         "total": "659.00€",
-        "status": "Out of Stock"
+        "status": "Available"
       },
       {
         "url": "https://www.ruoto.fi/metsastys/remington-golden-bullet-hv-2-3g-hp-525pcs-pienoiskivaarin-patruuna-22-lr-525kpl/p/147700009190/",
@@ -907,8 +907,8 @@
         "productDetails": "FMJ 3.6g",
         "brand": "Sellier & Bellot",
         "quantity": "50",
-        "pricePerRound": "0.800€",
-        "total": "39.99€",
+        "pricePerRound": "0.630€",
+        "total": "31.50€",
         "status": "Available"
       },
       {
@@ -940,8 +940,8 @@
         "productDetails": "FMJ 3.6g",
         "brand": "Sellier & Bellot",
         "quantity": "800",
-        "pricePerRound": "0.800€",
-        "total": "639.84€",
+        "pricePerRound": "0.630€",
+        "total": "503.92€",
         "status": "Available"
       },
       {
@@ -1061,8 +1061,8 @@
         "productDetails": "FMJ 3.6g",
         "brand": "Sellier & Bellot",
         "quantity": "39",
-        "pricePerRound": "0.800€",
-        "total": "31.19€",
+        "pricePerRound": "0.630€",
+        "total": "24.57€",
         "status": "Available"
       },
       {
@@ -1183,8 +1183,8 @@
         "productDetails": "FMJ 3.6g",
         "brand": "Sellier & Bellot",
         "quantity": "20",
-        "pricePerRound": "1.499€",
-        "total": "29.99€",
+        "pricePerRound": "0.630€",
+        "total": "12.60€",
         "status": "Available"
       }
     ],
@@ -1209,7 +1209,7 @@
         "quantity": "500",
         "pricePerRound": "1.020€",
         "total": "510.00€",
-        "status": "Available"
+        "status": "Out of Stock"
       },
       {
         "url": "https://www.metsoase.fi/kivaarit/ggg-nato-308win-9-5g-fmj-kivaarin-patruuna/p/4779032300193/",
@@ -1494,7 +1494,7 @@
         "quantity": "20",
         "pricePerRound": "3.745€",
         "total": "74.90€",
-        "status": "Out of Stock",
+        "status": "Available",
         "nonToxic": true
       },
       {
@@ -1749,7 +1749,7 @@
         "quantity": "20",
         "pricePerRound": "3.995€",
         "total": "79.90€",
-        "status": "Available",
+        "status": "Out of Stock",
         "nonToxic": true
       },
       {
@@ -1775,7 +1775,7 @@
         "quantity": "500",
         "pricePerRound": "0.530€",
         "total": "265.00€",
-        "status": "Available"
+        "status": "Out of Stock"
       },
       {
         "url": "https://www.oulunase.fi/product/324/stv-scorpio-762x39-bulk-500-ptr",
