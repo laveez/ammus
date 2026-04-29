@@ -455,7 +455,7 @@
         "brand": "Geco",
         "quantity": "5000",
         "pricePerRound": "0.120€",
-        "total": "594.93€",
+        "total": "593.97€",
         "status": "Out of Stock"
       },
       {
@@ -488,7 +488,7 @@
         "brand": "Norma",
         "quantity": "500",
         "pricePerRound": "0.120€",
-        "total": "59.42€",
+        "total": "59.30€",
         "status": "Available"
       },
       {
@@ -565,7 +565,7 @@
         "brand": "Geco",
         "quantity": "500",
         "pricePerRound": "0.120€",
-        "total": "59.54€",
+        "total": "59.42€",
         "status": "Out of Stock"
       },
       {
@@ -1749,7 +1749,7 @@
         "quantity": "20",
         "pricePerRound": "3.995€",
         "total": "79.90€",
-        "status": "Available",
+        "status": "Out of Stock",
         "nonToxic": true
       },
       {
