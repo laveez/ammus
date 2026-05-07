@@ -1,379 +1,187 @@
-import {readFileSync, writeFileSync} from 'node:fs';
-import {dirname, resolve} from 'node:path';
-import {fileURLToPath} from 'node:url';
-import {chromium, type Page} from 'playwright';
+import {type BrowserContext, chromium} from 'playwright';
+import {adapters, findAdapter} from './adapters/index.js';
+import {type Adapter, callExtract} from './lib/adapter.js';
+import {daysBetween, formatPrice, formatPricePerRound, parsePriceField, parseQuantity, todayIso} from './lib/format.js';
+import {isNonToxicByName} from './lib/nontox.js';
+import {readProducts, readRetailers, writeProducts, writeRetailers} from './lib/products-store.js';
+import type {DiscoveredProduct, ExtractResult, Product, ProductsData, RetailersData} from './lib/types.js';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const PRODUCTS_PATH = resolve(__dirname, '../src/data/products.json');
 const TIMEOUT = 15_000;
 const CONCURRENCY = 5;
-const dryRun = process.argv.includes('--dry-run');
+const PRUNE_DAYS = 14;
 
-interface Product {
-  url: string
-  retailer: string
-  productName: string
-  productDetails: string
-  brand: string
-  quantity: string
-  pricePerRound: string
-  total: string
-  status: string
-  nonToxic?: boolean | null
+const args = process.argv.slice(2);
+const dryRun = args.includes('--dry-run');
+const onlyRetailerArg = args.find(a => a.startsWith('--retailer='));
+const onlyCaliberArg = args.find(a => a.startsWith('--caliber='));
+const skipDiscovery = args.includes('--skip-discovery');
+const skipDelivery = args.includes('--skip-delivery');
+const onlyRetailer = onlyRetailerArg?.split('=')[1];
+const onlyCaliber = onlyCaliberArg?.split('=')[1];
+
+interface DiscoveryResult {
+  adapter: Adapter
+  caliber: string
+  /** null = discovery not implemented; existing URLs retained unconditionally */
+  discovered: DiscoveredProduct[] | null
 }
 
-interface ProductsData {
-  calibers: string[]
-  products: Record<string, Product[]>
-}
+async function runDiscovery(
+  context: BrowserContext,
+  data: ProductsData,
+): Promise<DiscoveryResult[]> {
+  if (skipDiscovery) {
+    console.log('Skipping discovery (--skip-discovery).');
+    return [];
+  }
 
-interface PriceResult {
-  price: number | null
-  available: boolean | null
-  nonToxic: boolean | null
-  strategy: string
-  variants?: VariantInfo[]
-}
+  const tasks: { adapter: Adapter; caliber: string }[] = [];
+  for (const adapter of adapters) {
+    if (onlyRetailer && adapter.name !== onlyRetailer) continue;
+    for (const caliber of data.calibers) {
+      if (onlyCaliber && caliber !== onlyCaliber) continue;
+      tasks.push({adapter, caliber});
+    }
+  }
 
-interface VariantInfo {
-  qty: number
-  price: number
-  available: boolean
-}
+  console.log(`\n=== Phase 1: Discovery (${tasks.length} retailer/caliber combos) ===`);
+  const results: DiscoveryResult[] = [];
 
-// --- Price extraction strategies ---
-
-async function tryJsonLd(page: Page): Promise<PriceResult> {
-  const result = await page.evaluate(() => {
-    const scripts = document.querySelectorAll('script[type="application/ld+json"]');
-    for (const script of scripts) {
+  for (let i = 0; i < tasks.length; i += CONCURRENCY) {
+    const batch = tasks.slice(i, i + CONCURRENCY);
+    await Promise.all(batch.map(async ({adapter, caliber}) => {
+      const page = await context.newPage();
       try {
-        const data = JSON.parse(script.textContent || '');
-        const items = Array.isArray(data) ? data : [data];
-        for (const item of items) {
-          if (item['@type'] === 'Product' || item['@type'] === 'IndividualProduct') {
-            const offers = item.offers;
-            if (!offers) continue;
-            const offer = Array.isArray(offers) ? offers[0] : offers;
-            const price = offer.lowPrice ?? offer.price;
-            const avail = offer.availability;
-            if (price != null) {
-              return {
-                price: typeof price === 'string' ? parseFloat(price.replace(',', '.')) : price,
-                available: avail ? avail.includes('InStock') : null,
-              };
-            }
-          }
+        const discovered = await adapter.discover(page, caliber);
+        results.push({adapter, caliber, discovered});
+        if (discovered === null) {
+          console.log(`  ${adapter.name} | ${caliber} — discovery not implemented`);
+        } else {
+          console.log(`  ${adapter.name} | ${caliber} — ${discovered.length} URLs`);
         }
-      } catch {/* skip malformed JSON-LD */}
-    }
-    return null;
-  });
-  if (result?.price) return {...result, nonToxic: null, strategy: 'json-ld'};
-  return {price: null, available: null, nonToxic: null, strategy: 'json-ld'};
-}
-
-async function tryMetaTags(page: Page): Promise<PriceResult> {
-  const result = await page.evaluate(() => {
-    const priceMeta =
-      document.querySelector<HTMLMetaElement>('meta[itemprop="price"]') ??
-      document.querySelector<HTMLMetaElement>('meta[property="product:price:amount"]');
-    if (priceMeta?.content) {
-      const price = parseFloat(priceMeta.content.replace(',', '.'));
-      const availMeta = document.querySelector<HTMLMetaElement>('meta[itemprop="availability"]');
-      const available = availMeta ? availMeta.content.includes('InStock') : null;
-      return {price: isNaN(price) ? null : price, available};
-    }
-    return null;
-  });
-  if (result?.price) return {...result, nonToxic: null, strategy: 'meta-tags'};
-  return {price: null, available: null, nonToxic: null, strategy: 'meta-tags'};
-}
-
-async function tryDomSelectors(page: Page): Promise<PriceResult> {
-  const result = await page.evaluate(() => {
-    const selectors = [
-      // WooCommerce
-      '.woocommerce-Price-amount bdi',
-      '.woocommerce-Price-amount',
-      'p.price ins .woocommerce-Price-amount bdi',
-      'p.price .woocommerce-Price-amount bdi',
-      // Ahtihuvila
-      '.tuotekortti_tuotehinta_tarjous',
-      // Generic
-      '.product-price .current-price',
-      '.product-price',
-      '[data-price]',
-      '.price-value',
-      '.current-price',
-    ];
-
-    for (const sel of selectors) {
-      const el = document.querySelector(sel);
-      if (el) {
-        const text = el.textContent?.trim() || '';
-        const match = text.match(/([\d\s]+[.,]\d{2})/);
-        if (match) {
-          const price = parseFloat(match[1].replace(/\s/g, '').replace(',', '.'));
-          if (!isNaN(price) && price > 0) return {price};
-        }
-        // data-price attribute
-        if (el instanceof HTMLElement && el.dataset.price) {
-          const price = parseFloat(el.dataset.price.replace(',', '.'));
-          if (!isNaN(price) && price > 0) return {price};
-        }
+      } catch (err) {
+        const msg = err instanceof Error ? err.message.slice(0, 60) : String(err);
+        console.log(`  ${adapter.name} | ${caliber} — ERROR: ${msg}`);
+        results.push({adapter, caliber, discovered: null});
+      } finally {
+        await page.close();
       }
-    }
-    return null;
-  });
-  if (result?.price) return {price: result.price, available: null, nonToxic: null, strategy: 'dom-selectors'};
-  return {price: null, available: null, nonToxic: null, strategy: 'dom-selectors'};
+    }));
+  }
+
+  return results;
 }
 
-async function tryJsVariables(page: Page): Promise<PriceResult> {
-  const result = await page.evaluate(() => {
-    // Ahtihuvila uses `valittuhinta`, asejaosa uses `productPrice`
-    const w = window as Record<string, unknown>;
-    for (const key of ['valittuhinta', 'productPrice']) {
-      const val = w[key];
-      if (typeof val === 'number' && val > 0) return {price: val};
-      if (typeof val === 'string') {
-        const price = parseFloat(val.replace(',', '.'));
-        if (!isNaN(price) && price > 0) return {price};
+function applyDiscovery(data: ProductsData, results: DiscoveryResult[]): { added: number; pruned: number } {
+  const today = todayIso();
+  let added = 0;
+  let pruned = 0;
+
+  // Map: retailer name → set of URLs we saw this run (only for adapters with implemented discover)
+  const seenByRetailer = new Map<string, Set<string>>();
+  for (const r of results) {
+    if (r.discovered === null) continue;
+    const set = seenByRetailer.get(r.adapter.name) ?? new Set<string>();
+    for (const d of r.discovered) set.add(d.url);
+    seenByRetailer.set(r.adapter.name, set);
+  }
+
+  // Update lastSeen + add brand-new products as bare entries
+  for (const r of results) {
+    if (r.discovered === null) continue;
+    const calBucket = data.products[r.caliber] ?? [];
+    for (const d of r.discovered) {
+      const existing = calBucket.filter(p => p.url === d.url);
+      if (existing.length > 0) {
+        for (const p of existing) p.lastSeen = today;
+        continue;
       }
+      // Brand-new URL — seed minimal entry; price phase fills in
+      calBucket.push({
+        url: d.url,
+        retailer: r.adapter.name,
+        productName: d.productName ?? '',
+        productDetails: '',
+        brand: d.hint?.brand ?? '',
+        quantity: '0',
+        pricePerRound: '0.000€',
+        total: '0.00€',
+        status: 'Available',
+        lastSeen: today,
+      });
+      added++;
     }
-    return null;
-  });
-  if (result?.price) return {price: result.price, available: null, nonToxic: null, strategy: 'js-variables'};
-  return {price: null, available: null, nonToxic: null, strategy: 'js-variables'};
-}
+    data.products[r.caliber] = calBucket;
+  }
 
-async function tryTextRegex(page: Page): Promise<PriceResult> {
-  const result = await page.evaluate(() => {
-    // Get visible text and find price patterns
-    const body = document.body?.innerText || '';
-    // Match prices like "16,90 €", "299.00€", "1 719,00 €"
-    const matches = [...body.matchAll(/([\d\s]+[.,]\d{2})\s*€/g)];
-    if (matches.length === 0) return null;
-
-    // Return the first reasonable price (usually the main product price)
-    // Filter out very small numbers that might be unit prices
-    const prices = matches
-      .map(m => parseFloat(m[1].replace(/\s/g, '').replace(',', '.')))
-      .filter(p => !isNaN(p) && p > 0);
-
-    if (prices.length === 0) return null;
-    return {price: prices[0]};
-  });
-  if (result?.price) return {price: result.price, available: null, nonToxic: null, strategy: 'text-regex'};
-  return {price: null, available: null, nonToxic: null, strategy: 'text-regex'};
-}
-
-async function extractAvailability(page: Page): Promise<boolean | null> {
-  return page.evaluate(() => {
-    // JSON-LD
-    const scripts = document.querySelectorAll('script[type="application/ld+json"]');
-    for (const script of scripts) {
-      try {
-        const data = JSON.parse(script.textContent || '');
-        const items = Array.isArray(data) ? data : [data];
-        for (const item of items) {
-          const offers = item.offers;
-          if (!offers) continue;
-          const offer = Array.isArray(offers) ? offers[0] : offers;
-          if (offer.availability) return offer.availability.includes('InStock');
-        }
-      } catch {/* skip */}
-    }
-
-    // Meta tags
-    const availMeta = document.querySelector('meta[itemprop="availability"]') as HTMLMetaElement;
-    if (availMeta?.content) return availMeta.content.includes('InStock');
-
-    // Common availability indicators in page text
-    const text = document.body?.innerText?.toLowerCase() || '';
-    if (text.includes('varastossa') || text.includes('saatavilla')) return true;
-    if (text.includes('ei varastossa') || text.includes('loppunut') || text.includes('ilmoita, kun saatavilla')) return false;
-
-    // CSS classes
-    const inStock = document.querySelector('.in-stock, .instock, .available');
-    const outOfStock = document.querySelector('.out-of-stock, .outofstock, .unavailable, .sold-out');
-    if (inStock) return true;
-    if (outOfStock) return false;
-
-    // Add to cart button presence
-    const cartBtn = document.querySelector('[name="add-to-cart"], .add-to-cart, #add-to-cart, .ostoskorinappi, #ostoskorinappi');
-    if (cartBtn) {
-      const disabled = (cartBtn as HTMLButtonElement).disabled;
-      return !disabled;
-    }
-
-    return null;
-  });
-}
-
-// Keywords that indicate non-toxic ammunition
-const NON_TOXIC_PATTERN = /lyijyt[oö]n|lead[- ]?free|non[- ]?toxic|nontoxic|sintox|\btfmj\b|monolithic|solid copper|kupariluoti|powerhead.blade|ecostrike|eco.strike|evostrike|naturalis|\bttsx\b|exergy|\bodin\b|clean.range|scorpio.eco/i;
-
-async function extractNonToxic(page: Page): Promise<boolean | null> {
-  return page.evaluate(patternSource => {
-    const pattern = new RegExp(patternSource, 'i');
-
-    // JSON-LD product name + description only
-    const scripts = document.querySelectorAll('script[type="application/ld+json"]');
-    for (const script of scripts) {
-      try {
-        const data = JSON.parse(script.textContent || '');
-        const items = Array.isArray(data) ? data : [data];
-        for (const item of items) {
-          if (item['@type'] === 'Product' || item['@type'] === 'IndividualProduct') {
-            const haystack = `${item.name || ''} ${item.description || ''}`;
-            if (pattern.test(haystack)) return true;
-          }
-        }
-      } catch {/* skip */}
-    }
-
-    // Product title (h1) only — avoids sidebar/related product contamination
-    const h1 = document.querySelector('h1')?.textContent || '';
-    if (pattern.test(h1)) return true;
-
-    return null;
-  }, NON_TOXIC_PATTERN.source);
-}
-
-function isNonToxicByName(product: Product): boolean {
-  const text = `${product.productName} ${product.productDetails} ${product.brand}`;
-  return NON_TOXIC_PATTERN.test(text);
-}
-
-async function extractVariants(page: Page): Promise<VariantInfo[] | null> {
-  const raw = await page.evaluate(() => {
-    const text = document.body?.innerText || '';
-    const lines = text.split('\n').map(l => l.trim());
-    const variants: { qty: number; price: number; available: boolean }[] = [];
-
-    for (let i = 0; i < lines.length; i++) {
-      const m = lines[i].match(/^Valitse\s+(\d+)\s*kpl$/i);
-      if (!m) continue;
-      const qty = parseInt(m[1]);
-      const priceLine = lines[i + 1] || '';
-      const pm = priceLine.match(/([\d\s]+[.,]\d{2})\s*€/);
-      if (!pm) continue;
-      const price = parseFloat(pm[1].replace(/\s/g, '').replace(',', '.'));
-      if (isNaN(price) || price <= 0) continue;
-
-      let available = true;
-      for (let j = i + 2; j < Math.min(i + 5, lines.length); j++) {
-        if (/tilapäisesti loppu|loppunut/i.test(lines[j])) {
-          available = false; break;
-        }
-        if (/^heti|saatavilla/i.test(lines[j])) {
-          break;
-        }
+  // Auto-prune: only for retailers whose adapter implemented discovery this run
+  for (const caliber of data.calibers) {
+    const before = data.products[caliber] ?? [];
+    const after: Product[] = [];
+    for (const p of before) {
+      const seen = seenByRetailer.get(p.retailer);
+      if (!seen) {
+        after.push(p);
+        continue;
       }
-      variants.push({qty, price, available});
+      if (seen.has(p.url)) {
+        after.push(p);
+        continue;
+      }
+      const last = p.lastSeen;
+      if (!last) {
+        p.lastSeen = today;
+        after.push(p);
+        continue;
+      }
+      if (daysBetween(last, today) <= PRUNE_DAYS) {
+        after.push(p);
+        continue;
+      }
+      pruned++;
+      console.log(`  PRUNE ${p.retailer} | ${p.productName} (${caliber}) — last seen ${last}`);
     }
-    return variants.length > 1 ? variants : null;
-  });
-  return raw;
-}
-
-async function extractPrice(page: Page): Promise<PriceResult> {
-  // Try server-rendered strategies first (no SPA wait needed)
-  const fastStrategies = [tryJsonLd, tryMetaTags, tryDomSelectors, tryJsVariables];
-  for (const strategy of fastStrategies) {
-    const result = await strategy(page);
-    if (result.price !== null) {
-      if (result.available === null) result.available = await extractAvailability(page);
-      result.nonToxic = await extractNonToxic(page);
-      result.variants = await extractVariants(page) ?? undefined;
-      return result;
-    }
+    data.products[caliber] = after;
   }
 
-  // If nothing found, this is likely a SPA — wait for rendering and retry
-  await page.waitForTimeout(3000);
-  for (const strategy of fastStrategies) {
-    const result = await strategy(page);
-    if (result.price !== null) {
-      if (result.available === null) result.available = await extractAvailability(page);
-      result.nonToxic = await extractNonToxic(page);
-      result.variants = await extractVariants(page) ?? undefined;
-      return result;
-    }
-  }
-
-  // Last resort: text regex
-  const textResult = await tryTextRegex(page);
-  if (textResult.price !== null) {
-    textResult.available = await extractAvailability(page);
-    textResult.nonToxic = await extractNonToxic(page);
-    textResult.variants = await extractVariants(page) ?? undefined;
-    return textResult;
-  }
-
-  const available = await extractAvailability(page);
-  const nonToxic = await extractNonToxic(page);
-  return {price: null, available, nonToxic, strategy: 'none'};
+  return {added, pruned};
 }
 
-// --- Formatting helpers ---
+async function runPriceExtraction(
+  context: BrowserContext,
+  data: ProductsData,
+): Promise<{ corrections: number }> {
+  console.log('\n=== Phase 2/3: Price + variants ===');
 
-function parseQuantity(s: string): number {
-  const match = s.match(/(\d+)/);
-  return match ? parseInt(match[1]) : 0;
-}
-
-function formatPrice(price: number): string {
-  if (price >= 1000) {
-    const formatted = price.toFixed(2);
-    const [whole, decimals] = formatted.split('.');
-    // Add space as thousands separator
-    const withSpaces = whole.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-    return `${withSpaces}.${decimals}€`;
-  }
-  return `${price.toFixed(2)}€`;
-}
-
-function formatPricePerRound(price: number): string {
-  return `${price.toFixed(3)}€`;
-}
-
-// --- Main ---
-
-async function main() {
-  const data: ProductsData = JSON.parse(readFileSync(PRODUCTS_PATH, 'utf-8'));
-
-  // Collect all unique URLs
   const urlSet = new Set<string>();
   for (const caliber of data.calibers) {
-    for (const product of data.products[caliber]) {
+    if (onlyCaliber && caliber !== onlyCaliber) continue;
+    for (const product of data.products[caliber] ?? []) {
+      if (onlyRetailer && product.retailer !== onlyRetailer) continue;
       if (product.url) urlSet.add(product.url);
     }
   }
   const urls = [...urlSet];
-  console.log(`Found ${urls.length} unique URLs across ${data.calibers.length} calibers`);
-  if (dryRun) console.log('(DRY RUN — no files will be written)\n');
+  console.log(`Visiting ${urls.length} unique URLs...`);
 
-  const browser = await chromium.launch({headless: true});
-  const context = await browser.newContext({
-    userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
-  });
-
-  const results = new Map<string, PriceResult>();
+  const results = new Map<string, ExtractResult>();
   let succeeded = 0;
   let failed = 0;
   let completed = 0;
 
   async function fetchUrl(url: string) {
     const domain = new URL(url).hostname.replace('www.', '');
+    const retailer = data.calibers
+      .flatMap(c => data.products[c] ?? [])
+      .find(p => p.url === url)?.retailer;
+    const adapter = retailer ? findAdapter(retailer) : undefined;
     const page = await context.newPage();
     try {
       await page.goto(url, {timeout: TIMEOUT, waitUntil: 'domcontentloaded'});
-      const result = await extractPrice(page);
+      const result = adapter ? await callExtract(adapter, page) : {
+        price: null, available: null, nonToxic: null, strategy: 'no-adapter',
+      } as ExtractResult;
       results.set(url, result);
-
       completed++;
       if (result.price !== null) {
         const availStr = result.available === true ? 'In Stock' : result.available === false ? 'Out of Stock' : '?';
@@ -396,27 +204,26 @@ async function main() {
     }
   }
 
-  // Process URLs in parallel batches
   for (let i = 0; i < urls.length; i += CONCURRENCY) {
     const batch = urls.slice(i, i + CONCURRENCY);
     await Promise.all(batch.map(fetchUrl));
   }
 
-  await browser.close();
+  console.log(`\n${succeeded} succeeded, ${failed} failed.`);
 
-  console.log(`\n--- Results: ${succeeded} succeeded, ${failed} failed ---\n`);
+  return {corrections: applyResults(data, results)};
+}
 
-  // Build a flat list of all products with their caliber reference
-  const allProducts: { product: Product; caliber: string }[] = [];
+function applyResults(data: ProductsData, results: Map<string, ExtractResult>): number {
+  const allEntries: { product: Product; caliber: string }[] = [];
   for (const caliber of data.calibers) {
-    for (const product of data.products[caliber]) {
-      allProducts.push({product, caliber});
+    for (const product of data.products[caliber] ?? []) {
+      allEntries.push({product, caliber});
     }
   }
 
-  // Group products by URL
   const byUrl = new Map<string, { product: Product; caliber: string }[]>();
-  for (const entry of allProducts) {
+  for (const entry of allEntries) {
     const list = byUrl.get(entry.product.url) ?? [];
     list.push(entry);
     byUrl.set(entry.product.url, list);
@@ -427,7 +234,6 @@ async function main() {
     const result = results.get(url);
     if (!result) continue;
 
-    // Update non-toxic status: page-level detection OR product name match
     for (const {product} of entries) {
       const isNT = result.nonToxic === true || isNonToxicByName(product);
       if (isNT && product.nonToxic !== true) {
@@ -437,7 +243,6 @@ async function main() {
       }
     }
 
-    // Per-variant update: each variant has its own price + availability
     if (result.variants && result.variants.length > 0) {
       for (const {product} of entries) {
         const qtyNum = parseQuantity(product.quantity);
@@ -452,8 +257,8 @@ async function main() {
         }
 
         const newPPR = variant.price / variant.qty;
-        const oldPPR = parseFloat(product.pricePerRound.replace('€', ''));
-        const oldTotal = parseFloat(product.total.replace('€', '').replace(/\s/g, ''));
+        const oldPPR = parsePriceField(product.pricePerRound);
+        const oldTotal = parsePriceField(product.total);
         const pprChanged = Math.abs(oldPPR - newPPR) > 0.0005;
         const totalChanged = Math.abs(oldTotal - variant.price) > 0.01;
 
@@ -469,7 +274,6 @@ async function main() {
       continue;
     }
 
-    // Single-price update: one price + availability per URL
     if (result.available !== null) {
       for (const {product} of entries) {
         const newStatus = result.available ? 'Available' : 'Out of Stock';
@@ -484,11 +288,10 @@ async function main() {
     if (result.price === null) continue;
     const scrapedPrice = result.price;
 
-    // Find the entry whose total is closest to the scraped price
     let closest: { product: Product; caliber: string } | null = null;
     let closestDiff = Infinity;
     for (const entry of entries) {
-      const total = parseFloat(entry.product.total.replace('€', '').replace(/\s/g, ''));
+      const total = parsePriceField(entry.product.total);
       const diff = Math.abs(total - scrapedPrice);
       if (diff < closestDiff) {
         closestDiff = diff;
@@ -497,9 +300,8 @@ async function main() {
     }
     if (!closest) continue;
 
-    // Determine rounds per box from the closest entry
-    const basePPR = parseFloat(closest.product.pricePerRound.replace('€', ''));
-    const baseTotal = parseFloat(closest.product.total.replace('€', '').replace(/\s/g, ''));
+    const basePPR = parsePriceField(closest.product.pricePerRound);
+    const baseTotal = parsePriceField(closest.product.total);
     if (basePPR <= 0 || baseTotal <= 0) continue;
     const roundsPerBox = Math.round(baseTotal / basePPR);
     if (roundsPerBox < 10) {
@@ -511,8 +313,8 @@ async function main() {
     const newPPR = scrapedPrice / roundsPerBox;
 
     for (const {product} of entries) {
-      const oldPPR = parseFloat(product.pricePerRound.replace('€', ''));
-      const oldTotal = parseFloat(product.total.replace('€', '').replace(/\s/g, ''));
+      const oldPPR = parsePriceField(product.pricePerRound);
+      const oldTotal = parsePriceField(product.total);
       if (oldPPR <= 0 || oldTotal <= 0) continue;
 
       const pprRatio = newPPR / oldPPR;
@@ -538,14 +340,90 @@ async function main() {
       }
     }
   }
+  return corrections;
+}
 
+async function runDelivery(
+  context: BrowserContext,
+  retailers: RetailersData,
+): Promise<RetailersData> {
+  if (skipDelivery) {
+    console.log('Skipping delivery (--skip-delivery).');
+    return retailers;
+  }
+
+  console.log('\n=== Phase 4: Delivery rules ===');
+
+  const tasks = adapters.filter(a => !onlyRetailer || a.name === onlyRetailer);
+
+  for (let i = 0; i < tasks.length; i += CONCURRENCY) {
+    const batch = tasks.slice(i, i + CONCURRENCY);
+    await Promise.all(batch.map(async adapter => {
+      const page = await context.newPage();
+      try {
+        const rule = await adapter.delivery(page);
+        if (rule) {
+          retailers[adapter.name] = {
+            ...retailers[adapter.name],
+            baseUrl: adapter.baseUrl,
+            delivery: rule,
+          };
+          const free = rule.freeOverThreshold ? `, free > ${rule.freeOverThreshold}€` : '';
+          console.log(`  ${adapter.name} → ${rule.cheapestPrice.toFixed(2)}€${free} (${rule.method})`);
+        } else {
+          retailers[adapter.name] = {
+            ...retailers[adapter.name],
+            baseUrl: adapter.baseUrl,
+          };
+          console.log(`  ${adapter.name} → no rule scraped (using static if any)`);
+        }
+      } catch (err) {
+        const msg = err instanceof Error ? err.message.slice(0, 60) : String(err);
+        console.log(`  ${adapter.name} → ERROR: ${msg}`);
+        retailers[adapter.name] = {
+          ...retailers[adapter.name],
+          baseUrl: adapter.baseUrl,
+        };
+      } finally {
+        await page.close();
+      }
+    }));
+  }
+
+  return retailers;
+}
+
+async function main() {
+  const data = readProducts();
+  const retailers = readRetailers();
+
+  if (dryRun) console.log('(DRY RUN — no files will be written)\n');
+  if (onlyRetailer) console.log(`Filtering to retailer: ${onlyRetailer}`);
+  if (onlyCaliber) console.log(`Filtering to caliber: ${onlyCaliber}`);
+
+  const browser = await chromium.launch({headless: true});
+  const context = await browser.newContext({
+    userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+    locale: 'fi-FI',
+  });
+
+  const discovery = await runDiscovery(context, data);
+  const {added, pruned} = applyDiscovery(data, discovery);
+  console.log(`\nDiscovery: +${added} new, -${pruned} pruned.`);
+
+  const {corrections} = await runPriceExtraction(context, data);
   console.log(`\n${corrections} products updated.`);
 
-  if (!dryRun && corrections > 0) {
-    writeFileSync(PRODUCTS_PATH, JSON.stringify(data, null, 2) + '\n');
-    console.log(`Written to ${PRODUCTS_PATH}`);
-  } else if (dryRun) {
-    console.log('(DRY RUN — no changes written)');
+  const updatedRetailers = await runDelivery(context, retailers);
+
+  await browser.close();
+
+  if (!dryRun) {
+    writeProducts(data);
+    writeRetailers(updatedRetailers);
+    console.log('\nWritten to disk.');
+  } else {
+    console.log('\n(DRY RUN — no changes written)');
   }
 }
 

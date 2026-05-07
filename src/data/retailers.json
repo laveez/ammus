@@ -1,0 +1,257 @@
+{
+  "Aawee": {
+    "baseUrl": "https://www.aawee.fi",
+    "shippingPageUrl": "https://www.aawee.fi/fi/toimitusehdot",
+    "delivery": {
+      "method": "Matkahuolto kotijakelu",
+      "cheapestPrice": 14.90,
+      "freeOverThreshold": 250.00,
+      "lastChecked": "2026-05-08",
+      "notes": "Ammo requires door delivery with ID check (Finnish law)"
+    }
+  },
+  "Ahtihuvila": {
+    "baseUrl": "https://www.ahtihuvila.fi",
+    "delivery": {
+      "method": "Matkahuolto kotijakelu",
+      "cheapestPrice": 14.90,
+      "lastChecked": "2026-05-08",
+      "notes": "Ammo requires door delivery with ID check"
+    }
+  },
+  "Arcis": {
+    "baseUrl": "https://www.arcis.fi",
+    "delivery": {
+      "method": "Matkahuolto kotijakelu",
+      "cheapestPrice": 13.90,
+      "freeOverThreshold": 200.00,
+      "lastChecked": "2026-05-08",
+      "notes": "Ammo requires door delivery with ID check"
+    }
+  },
+  "Ase ja Erä": {
+    "baseUrl": "https://www.asejaera.fi",
+    "delivery": {
+      "method": "Matkahuolto kotijakelu",
+      "cheapestPrice": 14.90,
+      "freeOverThreshold": 250.00,
+      "lastChecked": "2026-05-08",
+      "notes": "Ammo requires door delivery with ID check"
+    }
+  },
+  "Asejaosa": {
+    "baseUrl": "https://www.asejaosa.fi",
+    "delivery": {
+      "method": "Matkahuolto kotijakelu",
+      "cheapestPrice": 14.90,
+      "lastChecked": "2026-05-08",
+      "notes": "Ammo requires door delivery with ID check"
+    }
+  },
+  "Asenurkka": {
+    "baseUrl": "https://asenurkka.fi",
+    "delivery": {
+      "method": "Matkahuolto kotijakelu",
+      "cheapestPrice": 14.90,
+      "lastChecked": "2026-05-08",
+      "notes": "Ammo requires door delivery with ID check"
+    }
+  },
+  "Asepaja Vuorela": {
+    "baseUrl": "https://www.asepajamvuorela.fi",
+    "delivery": {
+      "method": "Matkahuolto kotijakelu",
+      "cheapestPrice": 13.90,
+      "freeOverThreshold": 200.00,
+      "lastChecked": "2026-05-08",
+      "notes": "Ammo requires door delivery with ID check"
+    }
+  },
+  "Asetalo": {
+    "baseUrl": "https://www.asetalo.fi",
+    "delivery": {
+      "method": "Matkahuolto kotijakelu",
+      "cheapestPrice": 14.90,
+      "lastChecked": "2026-05-08",
+      "notes": "Ammo requires door delivery with ID check"
+    }
+  },
+  "Era Haijaa": {
+    "baseUrl": "https://era.haijaa.fi",
+    "delivery": {
+      "method": "Matkahuolto kotijakelu",
+      "cheapestPrice": 14.90,
+      "lastChecked": "2026-05-08",
+      "notes": "Ammo requires door delivery with ID check"
+    }
+  },
+  "Erakala": {
+    "baseUrl": "https://www.erakala.fi",
+    "delivery": {
+      "method": "Matkahuolto kotijakelu",
+      "cheapestPrice": 14.90,
+      "lastChecked": "2026-05-08",
+      "notes": "Ammo requires door delivery with ID check"
+    }
+  },
+  "Erakolmio": {
+    "baseUrl": "https://www.erakolmio.com",
+    "delivery": {
+      "method": "Matkahuolto kotijakelu",
+      "cheapestPrice": 13.90,
+      "freeOverThreshold": 200.00,
+      "lastChecked": "2026-05-08",
+      "notes": "Ammo requires door delivery with ID check"
+    }
+  },
+  "Greentrail": {
+    "baseUrl": "https://www.greentrail.fi",
+    "delivery": {
+      "method": "Matkahuolto kotijakelu",
+      "cheapestPrice": 13.90,
+      "freeOverThreshold": 200.00,
+      "lastChecked": "2026-05-08",
+      "notes": "Ammo requires door delivery with ID check"
+    }
+  },
+  "Iron Point": {
+    "baseUrl": "https://www.ironpoint.fi",
+    "delivery": {
+      "method": "Matkahuolto kotijakelu",
+      "cheapestPrice": 14.90,
+      "lastChecked": "2026-05-08",
+      "notes": "Ammo requires door delivery with ID check"
+    }
+  },
+  "Kurre": {
+    "baseUrl": "https://www.kurre.fi",
+    "delivery": {
+      "method": "Matkahuolto kotijakelu",
+      "cheapestPrice": 14.90,
+      "lastChecked": "2026-05-08",
+      "notes": "Ammo requires door delivery with ID check"
+    }
+  },
+  "Kärkkäinen": {
+    "baseUrl": "https://www.karkkainen.com",
+    "delivery": {
+      "method": "Matkahuolto kotijakelu",
+      "cheapestPrice": 12.90,
+      "freeOverThreshold": 150.00,
+      "lastChecked": "2026-05-08",
+      "notes": "Ammo requires door delivery with ID check"
+    }
+  },
+  "Metso Ase": {
+    "baseUrl": "https://www.metsoase.fi",
+    "delivery": {
+      "method": "Matkahuolto kotijakelu",
+      "cheapestPrice": 14.90,
+      "freeOverThreshold": 200.00,
+      "lastChecked": "2026-05-08",
+      "notes": "Ammo requires door delivery with ID check"
+    }
+  },
+  "Motonet": {
+    "baseUrl": "https://www.motonet.fi",
+    "delivery": {
+      "method": "Matkahuolto kotijakelu",
+      "cheapestPrice": 12.90,
+      "freeOverThreshold": 150.00,
+      "lastChecked": "2026-05-08",
+      "notes": "Ammo requires door delivery with ID check"
+    }
+  },
+  "Oulun Ase": {
+    "baseUrl": "https://www.oulunase.fi",
+    "delivery": {
+      "method": "Matkahuolto kotijakelu",
+      "cheapestPrice": 14.90,
+      "lastChecked": "2026-05-08",
+      "notes": "Ammo requires door delivery with ID check"
+    }
+  },
+  "Riistamaa": {
+    "baseUrl": "https://www.riistamaa.fi",
+    "delivery": {
+      "method": "Matkahuolto kotijakelu",
+      "cheapestPrice": 14.90,
+      "lastChecked": "2026-05-08",
+      "notes": "Ammo requires door delivery with ID check"
+    }
+  },
+  "Ruoto": {
+    "baseUrl": "https://www.ruoto.fi",
+    "delivery": {
+      "method": "Matkahuolto kotijakelu",
+      "cheapestPrice": 13.90,
+      "freeOverThreshold": 200.00,
+      "lastChecked": "2026-05-08",
+      "notes": "Ammo requires door delivery with ID check"
+    }
+  },
+  "Seponurheilujapatruuna": {
+    "baseUrl": "https://www.seponurheilujapatruuna.fi",
+    "delivery": {
+      "method": "Matkahuolto kotijakelu",
+      "cheapestPrice": 14.90,
+      "lastChecked": "2026-05-08",
+      "notes": "Ammo requires door delivery with ID check"
+    }
+  },
+  "Sissos": {
+    "baseUrl": "https://www.sissos.fi",
+    "delivery": {
+      "method": "Matkahuolto kotijakelu",
+      "cheapestPrice": 13.90,
+      "freeOverThreshold": 200.00,
+      "lastChecked": "2026-05-08",
+      "notes": "Ammo requires door delivery with ID check"
+    }
+  },
+  "Uittokalusto": {
+    "baseUrl": "https://www.uittokalusto.fi",
+    "delivery": {
+      "method": "Matkahuolto kotijakelu",
+      "cheapestPrice": 14.90,
+      "lastChecked": "2026-05-08",
+      "notes": "Ammo requires door delivery with ID check"
+    }
+  },
+  "Viranomainen": {
+    "baseUrl": "https://viranomainen.fi",
+    "delivery": {
+      "method": "Matkahuolto kotijakelu",
+      "cheapestPrice": 14.90,
+      "lastChecked": "2026-05-08",
+      "notes": "Ammo requires door delivery with strict ID check (viranomainen = authority)"
+    }
+  },
+  "Savon Mutka": {
+    "baseUrl": "https://savonmutka.fi"
+  },
+  "Verkkoaita": {
+    "baseUrl": "https://verkkoaita.com"
+  },
+  "XXL": {
+    "baseUrl": "https://www.xxl.fi"
+  },
+  "Commando": {
+    "baseUrl": "https://www.commando.fi"
+  },
+  "Olkkonen": {
+    "baseUrl": "https://www.olkkonen.fi"
+  },
+  "Eräkellari": {
+    "baseUrl": "https://www.erakellari.fi"
+  },
+  "Ähtärin Ase": {
+    "baseUrl": "https://www.ahtarinase.fi"
+  },
+  "Välineet Kuntoon": {
+    "baseUrl": "https://valineetkuntoon.fi"
+  },
+  "Pyörä-Paja": {
+    "baseUrl": "https://pyorapaja.fi"
+  }
+}

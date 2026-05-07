@@ -7,6 +7,7 @@ export interface Filters {
   brands: string[]
   maxPricePerRound: number | null
   maxQuantity: number | null
+  maxTotalWithDelivery: number | null
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -17,6 +18,7 @@ export const defaultFilters: Filters = {
   brands: [],
   maxPricePerRound: null,
   maxQuantity: null,
+  maxTotalWithDelivery: null,
 };
 
 interface Product {
@@ -147,6 +149,15 @@ export function FilterBar({products, filters, onChange}: FilterBarProps) {
         min="1"
         value={filters.maxQuantity ?? ''}
         onChange={e => update('maxQuantity', e.target.value ? parseInt(e.target.value) : null)}
+      />
+      <input
+        type="number"
+        className="filter-input"
+        placeholder="Max total + delivery"
+        step="1"
+        min="0"
+        value={filters.maxTotalWithDelivery ?? ''}
+        onChange={e => update('maxTotalWithDelivery', e.target.value ? parseFloat(e.target.value) : null)}
       />
     </div>
   );

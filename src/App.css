@@ -334,6 +334,28 @@ body {
   color: #4dd0e1;
 }
 
+/* Delivery + Total+Delivery */
+.delivery {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.delivery-free {
+  color: #66bb6a;
+  font-weight: 600;
+}
+
+.delivery-unknown {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.total-with-delivery {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
 /* Status */
 .status-indicator {
   display: inline-flex;
@@ -441,11 +463,22 @@ body {
   }
 }
 
+@media (max-width: 768px) {
+  /* Hide Delivery column on tablet — Total+Delivery is the more useful number */
+  .price-table th:nth-child(8),
+  .price-table td:nth-child(8) {
+    display: none;
+  }
+}
+
 @media (max-width: 480px) {
+  /* Hide Brand (3), Type (4), Total (7) — keep Total+Delivery on mobile */
   .price-table th:nth-child(3),
   .price-table td:nth-child(3),
   .price-table th:nth-child(4),
-  .price-table td:nth-child(4) {
+  .price-table td:nth-child(4),
+  .price-table th:nth-child(7),
+  .price-table td:nth-child(7) {
     display: none;
   }
 }
