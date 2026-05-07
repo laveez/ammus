@@ -1,6 +1,8 @@
 import type {Adapter} from '../lib/adapter.js';
 import {legacyAdapter} from './_legacy.js';
 import {aawee} from './aawee.js';
+import {karkkainen} from './karkkainen.js';
+import {motonet} from './motonet.js';
 import {sissos} from './sissos.js';
 
 /**
@@ -8,20 +10,25 @@ import {sissos} from './sissos.js';
  * the orchestrator runs them in parallel up to CONCURRENCY.
  *
  * To add a retailer:
- *   1. Create `adapters/<name>.ts` exporting an `Adapter`.
+ *   1. Create `adapters/<name>.ts` exporting an `Adapter`. Visit the live site
+ *      and confirm the category page URL + product URL pattern before writing
+ *      the adapter — guessed paths produce silent failures and noisy CI logs.
  *   2. Import + add to this array.
- *   3. (optional) Add an entry to `src/data/retailers.json` for static
- *      delivery rule data; the adapter's `delivery()` may override this when
- *      it succeeds.
+ *   3. (optional) Add a real `delivery` block to `src/data/retailers.json` if
+ *      you've confirmed the price/threshold; otherwise leave delivery null and
+ *      let the adapter's `delivery()` populate it on next CI run.
  */
 export const adapters: Adapter[] = [
-  // Adapters with discover() + delivery() implemented
+  // Adapters with discover() + delivery() implemented and URLs verified
   aawee,
+  karkkainen,
+  motonet,
   sissos,
 
-  // Legacy stubs — preserve current behavior while incremental migration
-  // happens. Replace each `legacyAdapter(...)` with a real adapter file as
-  // discovery/delivery support is added per retailer.
+  // Legacy stubs — preserve current behavior. Replace each with a real
+  // adapter file as discovery/delivery support is added per retailer.
+  // Verify each retailer's category-page URL pattern by visiting the site
+  // before writing an adapter.
   legacyAdapter('Ahtihuvila', 'https://www.ahtihuvila.fi'),
   legacyAdapter('Arcis', 'https://www.arcis.fi'),
   legacyAdapter('Ase ja Erä', 'https://www.asejaera.fi'),
@@ -35,9 +42,7 @@ export const adapters: Adapter[] = [
   legacyAdapter('Greentrail', 'https://www.greentrail.fi'),
   legacyAdapter('Iron Point', 'https://www.ironpoint.fi'),
   legacyAdapter('Kurre', 'https://www.kurre.fi'),
-  legacyAdapter('Kärkkäinen', 'https://www.karkkainen.com'),
   legacyAdapter('Metso Ase', 'https://www.metsoase.fi'),
-  legacyAdapter('Motonet', 'https://www.motonet.fi'),
   legacyAdapter('Oulun Ase', 'https://www.oulunase.fi'),
   legacyAdapter('Riistamaa', 'https://www.riistamaa.fi'),
   legacyAdapter('Ruoto', 'https://www.ruoto.fi'),

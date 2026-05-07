@@ -3,21 +3,23 @@ import type {Adapter} from '../lib/adapter.js';
 import {discoverByPattern, fetchDelivery} from '../lib/discovery.js';
 import type {DeliveryRule, DiscoveredProduct} from '../lib/types.js';
 
-const BASE_URL = 'https://www.sissos.fi';
+const BASE_URL = 'https://www.karkkainen.com';
 
+// Kärkkäinen: search-based discovery since they use category pages with deep
+// pagination. Uses both /verkkokauppa/<slug> and /en-en/<slug> URL forms.
 const CALIBER_QUERIES: Record<string, string> = {
   '22 LR': '22+lr+patruuna',
   '222 Remington': '222+rem+patruuna',
   '223 Remington': '223+rem+patruuna',
   '6.5 Creedmoor': '6.5+creedmoor+patruuna',
-  '30-06 Springfield': '30-06+patruuna',
+  '30-06 Springfield': '30-06+sprg+patruuna',
   '308 Winchester': '308+win+patruuna',
   '7.62x39': '7.62x39+patruuna',
   '9mm': '9mm+luger+patruuna',
 };
 
-export const sissos: Adapter = {
-  name: 'Sissos',
+export const karkkainen: Adapter = {
+  name: 'Kärkkäinen',
   baseUrl: BASE_URL,
 
   async discover(page: Page, caliber: string): Promise<DiscoveredProduct[] | null> {
@@ -26,14 +28,14 @@ export const sissos: Adapter = {
     return discoverByPattern(page, {
       caliber,
       baseUrl: BASE_URL,
-      categoryUrls: [`${BASE_URL}/haku?q=${q}`],
-      productUrlPattern: /sissos\.fi\/.*\/p\/[A-Za-z0-9_]+\/?$/,
+      categoryUrls: [`${BASE_URL}/verkkokauppa?search=${q}`],
+      productUrlPattern: /karkkainen\.com\/(verkkokauppa|en-en)\/[^/?]+(?:\?|$|\/)/,
     });
   },
 
   async delivery(page: Page): Promise<DeliveryRule | null> {
     return fetchDelivery(page, {
-      shippingUrl: `${BASE_URL}/i/toimitusehdot/`,
+      shippingUrl: `${BASE_URL}/asiakaspalvelu/toimitustavat`,
     });
   },
 };
