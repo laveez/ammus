@@ -1,39 +1,9 @@
-import type {Page} from 'playwright';
-import type {Adapter} from '../lib/adapter.js';
-import {discoverByPattern, fetchDelivery} from '../lib/discovery.js';
-import type {DeliveryRule, DiscoveredProduct} from '../lib/types.js';
+import {bySearch, searchAdapter} from '../lib/adapter.js';
 
-const BASE_URL = 'https://www.metsoase.fi';
-
-const CALIBER_QUERIES: Record<string, string> = {
-  '22 LR': '22+lr+patruuna',
-  '222 Remington': '222+rem+patruuna',
-  '223 Remington': '223+rem+patruuna',
-  '6.5 Creedmoor': '6.5+creedmoor+patruuna',
-  '30-06 Springfield': '30-06+sprg+patruuna',
-  '308 Winchester': '308+win+patruuna',
-  '7.62x39': '7.62x39+patruuna',
-  '9mm': '9mm+luger+patruuna',
-};
-
-export const metsoase: Adapter = {
+export const metsoase = searchAdapter({
   name: 'Metso Ase',
-  baseUrl: BASE_URL,
-
-  async discover(page: Page, caliber: string): Promise<DiscoveredProduct[] | null> {
-    const q = CALIBER_QUERIES[caliber];
-    if (!q) return [];
-    return discoverByPattern(page, {
-      caliber,
-      baseUrl: BASE_URL,
-      categoryUrls: [`${BASE_URL}/haku?q=${q}`],
-      productUrlPattern: /metsoase\.fi\/.+\/p\/[^/]+\/?$/,
-    });
-  },
-
-  async delivery(page: Page): Promise<DeliveryRule | null> {
-    return fetchDelivery(page, {
-      shippingUrl: `${BASE_URL}/toimitusehdot`,
-    });
-  },
-};
+  baseUrl: 'https://www.metsoase.fi',
+  productUrlPattern: /metsoase\.fi\/.+\/p\/[^/]+\/?$/,
+  categoryUrls: bySearch(q => `/haku?q=${q}`),
+  shippingPath: '/toimitusehdot',
+});

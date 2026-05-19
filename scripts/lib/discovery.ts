@@ -1,9 +1,11 @@
 import type {Page} from 'playwright';
 import {parseDeliveryFromText} from './delivery.js';
+import {todayIso} from './format.js';
 import type {DeliveryRule, DiscoveredProduct} from './types.js';
 
 const TIMEOUT = 15_000;
 const SETTLE_MS = 1500;
+const DELIVERY_SETTLE_MS = 1000;
 
 export interface DiscoverByPatternOptions {
   /** Caliber being discovered. Tagged onto every result. */
@@ -34,8 +36,9 @@ export async function discoverByPattern(
       await page.goto(categoryUrl, {timeout: TIMEOUT, waitUntil: 'domcontentloaded'});
       if (opts.waitForSelector) {
         await page.waitForSelector(opts.waitForSelector, {timeout: 5000}).catch(() => {/* ok */});
+      } else {
+        await page.waitForLoadState('networkidle', {timeout: SETTLE_MS}).catch(() => {/* ok */});
       }
-      await page.waitForTimeout(SETTLE_MS);
 
       const links = await page.evaluate(({patternSrc, base}) => {
         const re = new RegExp(patternSrc);
@@ -43,7 +46,6 @@ export async function discoverByPattern(
         document.querySelectorAll('a[href]').forEach(a => {
           const raw = (a as HTMLAnchorElement).getAttribute('href') ?? '';
           if (!raw) return;
-          // Resolve relative URLs against base
           let abs: string;
           try {
             abs = new URL(raw, base).toString();
@@ -90,7 +92,7 @@ export async function fetchDelivery(
 ): Promise<DeliveryRule | null> {
   try {
     await page.goto(opts.shippingUrl, {timeout: TIMEOUT, waitUntil: 'domcontentloaded'});
-    await page.waitForTimeout(1000);
+    await page.waitForLoadState('networkidle', {timeout: DELIVERY_SETTLE_MS}).catch(() => {/* ok */});
     const text = await page.evaluate(() => document.body?.innerText ?? '');
     const parsed = parseDeliveryFromText(text);
     if (parsed.cheapest == null || !parsed.doorDelivery) return null;
@@ -98,7 +100,7 @@ export async function fetchDelivery(
       method: opts.method ?? 'Matkahuolto kotijakelu',
       cheapestPrice: parsed.cheapest,
       freeOverThreshold: parsed.freeOver,
-      lastChecked: new Date().toISOString().slice(0, 10),
+      lastChecked: todayIso(),
       notes: opts.notes ?? 'Ammo requires door delivery with ID check',
     };
   } catch {

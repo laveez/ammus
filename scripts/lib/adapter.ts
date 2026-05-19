@@ -3,7 +3,9 @@ import {extractAvailability, tryDomSelectors, tryJsVariables} from './parsers/do
 import {tryJsonLd} from './parsers/json-ld.js';
 import {tryMetaTags} from './parsers/meta-tags.js';
 import {tryTextRegex} from './parsers/text-regex.js';
+import {discoverByPattern, fetchDelivery} from './discovery.js';
 import {extractNonToxic} from './nontox.js';
+import {CALIBER_QUERIES_PATRUUNA} from './queries.js';
 import type {DeliveryRule, DiscoveredProduct, ExtractResult, VariantInfo} from './types.js';
 import {extractVariants} from './variants.js';
 
@@ -30,57 +32,133 @@ export interface Adapter {
 }
 
 /**
- * Default `extract` implementation: tries server-rendered strategies, then
- * waits 3s and retries (catches SPA-rendered prices), then falls back to
- * text-regex.
+ * Common selectors that signal "product detail content has rendered." Used by
+ * `defaultExtract` to short-circuit the SPA-hydration wait when content is
+ * actually present, instead of always waiting a fixed 3s.
  */
-export async function defaultExtract(page: Page): Promise<ExtractResult> {
-  const fastStrategies = [tryJsonLd, tryMetaTags, tryDomSelectors, tryJsVariables];
-  for (const strategy of fastStrategies) {
-    const result = await strategy(page);
-    if (result.price !== null) {
-      if (result.available === null) result.available = await extractAvailability(page);
-      result.nonToxic = await extractNonToxic(page);
-      result.variants = await extractVariants(page) ?? undefined;
-      return result;
-    }
-  }
+const PRICE_SIGNAL_SELECTOR = [
+  'script[type="application/ld+json"]',
+  'meta[property="product:price:amount"]',
+  'meta[itemprop="price"]',
+  '[itemprop="price"]',
+  '.price',
+  '.product-price',
+  '.woocommerce-Price-amount',
+].join(', ');
 
-  await page.waitForTimeout(3000);
-  for (const strategy of fastStrategies) {
-    const result = await strategy(page);
-    if (result.price !== null) {
-      if (result.available === null) result.available = await extractAvailability(page);
-      result.nonToxic = await extractNonToxic(page);
-      result.variants = await extractVariants(page) ?? undefined;
-      return result;
-    }
-  }
-
-  const textResult = await tryTextRegex(page);
-  if (textResult.price !== null) {
-    textResult.available = await extractAvailability(page);
-    textResult.nonToxic = await extractNonToxic(page);
-    textResult.variants = await extractVariants(page) ?? undefined;
-    return textResult;
-  }
-
-  const available = await extractAvailability(page);
-  const nonToxic = await extractNonToxic(page);
-  return {price: null, available, nonToxic, strategy: 'none'};
+async function enrich(page: Page, result: ExtractResult): Promise<ExtractResult> {
+  const [available, nonToxic, variants] = await Promise.all([
+    result.available === null ? extractAvailability(page) : Promise.resolve(result.available),
+    extractNonToxic(page),
+    extractVariants(page),
+  ]);
+  result.available = available;
+  result.nonToxic = nonToxic;
+  result.variants = variants ?? undefined;
+  return result;
 }
 
 /**
- * Default `variants` implementation: shared parser. Adapters override only
- * for retailers with custom variant patterns.
+ * Default `extract`: try server-rendered strategies first; if none yield a
+ * price, wait (up to 3s) for an SPA-style content signal and retry; finally,
+ * fall back to text-regex scraping.
  */
+export async function defaultExtract(page: Page): Promise<ExtractResult> {
+  const fastStrategies = [tryJsonLd, tryMetaTags, tryDomSelectors, tryJsVariables];
+
+  for (const strategy of fastStrategies) {
+    const result = await strategy(page);
+    if (result.price !== null) return enrich(page, result);
+  }
+
+  await page.waitForSelector(PRICE_SIGNAL_SELECTOR, {timeout: 3000}).catch(() => {/* ok */});
+
+  for (const strategy of fastStrategies) {
+    const result = await strategy(page);
+    if (result.price !== null) return enrich(page, result);
+  }
+
+  const textResult = await tryTextRegex(page);
+  if (textResult.price !== null) return enrich(page, textResult);
+
+  const [available, nonToxic] = await Promise.all([extractAvailability(page), extractNonToxic(page)]);
+  return {price: null, available, nonToxic, strategy: 'none'};
+}
+
 export async function defaultVariants(page: Page): Promise<VariantInfo[] | null> {
   return extractVariants(page);
 }
 
-/**
- * Resolve adapter to its `extract` method, falling back to `defaultExtract`.
- */
 export async function callExtract(adapter: Adapter, page: Page): Promise<ExtractResult> {
   return adapter.extract ? adapter.extract(page) : defaultExtract(page);
+}
+
+export interface SearchAdapterOpts {
+  name: string
+  baseUrl: string
+  /** Regex matched against discovered hrefs. */
+  productUrlPattern: RegExp
+  /**
+   * Given a caliber, return the category/search URLs to crawl. Use the
+   * `bySearch()` / `byCategory()` helpers for common cases.
+   */
+  categoryUrls: (caliber: string) => string[]
+  /** Path (relative to baseUrl) to the shipping page. Omit for delivery: null. */
+  shippingPath?: string
+  shippingMethod?: string
+  shippingNotes?: string
+}
+
+/**
+ * Build an `Adapter` from URL knowledge alone. Handles both search-based and
+ * category-based discovery via the `categoryUrls` callback.
+ */
+export function searchAdapter(opts: SearchAdapterOpts): Adapter {
+  const {name, baseUrl, productUrlPattern, categoryUrls, shippingPath} = opts;
+  const absolutize = (p: string) => p.startsWith('http') ? p : `${baseUrl}${p}`;
+  return {
+    name,
+    baseUrl,
+    async discover(page, caliber) {
+      const paths = categoryUrls(caliber);
+      if (paths.length === 0) return [];
+      return discoverByPattern(page, {
+        caliber,
+        baseUrl,
+        categoryUrls: paths.map(absolutize),
+        productUrlPattern,
+      });
+    },
+    async delivery(page) {
+      if (!shippingPath) return null;
+      return fetchDelivery(page, {
+        shippingUrl: absolutize(shippingPath),
+        method: opts.shippingMethod,
+        notes: opts.shippingNotes,
+      });
+    },
+  };
+}
+
+/**
+ * Category-URL builder: maps each search query to a single search URL using
+ * the supplied path builder. Defaults to the `+patruuna` caliber-query set.
+ */
+export function bySearch(
+  searchPath: (query: string) => string,
+  queries: Record<string, string> = CALIBER_QUERIES_PATRUUNA,
+): (caliber: string) => string[] {
+  return caliber => {
+    const q = queries[caliber];
+    return q ? [searchPath(q)] : [];
+  };
+}
+
+/**
+ * Category-URL builder: looks up a per-caliber list of category paths.
+ */
+export function byCategory(
+  paths: Record<string, string[]>,
+): (caliber: string) => string[] {
+  return caliber => paths[caliber] ?? [];
 }

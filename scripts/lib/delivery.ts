@@ -33,28 +33,28 @@ export function parseDeliveryFromText(text: string): ParsedDelivery {
     if (!isNaN(v) && v > 0) out.freeOver = v;
   }
 
-  // Score each price by proximity to door-delivery hints. Skip prices in
-  // pickup-automaatti contexts — those are illegal for ammo in Finland.
-  type Candidate = { price: number; doorScore: number; pickupScore: number }
+  // Skip prices in pickup-automaatti contexts — those are illegal for ammo in Finland.
+  type Candidate = { price: number; nearDoorHint: boolean; nearPickupHint: boolean }
   const candidates: Candidate[] = [];
   for (const m of text.matchAll(PRICE_RE)) {
     const v = parseFloat(m[1].replace(/\s/g, '').replace(',', '.'));
     if (isNaN(v) || v <= 0 || v > 50) continue;
     const idx = m.index ?? 0;
     const window = text.slice(Math.max(0, idx - 120), idx + 120);
-    const doorScore = DOOR_DELIVERY_HINTS.test(window) ? 1 : 0;
-    const pickupScore = PICKUP_AUTOMAT_HINTS.test(window) ? 1 : 0;
-    candidates.push({price: v, doorScore, pickupScore});
+    candidates.push({
+      price: v,
+      nearDoorHint: DOOR_DELIVERY_HINTS.test(window),
+      nearPickupHint: PICKUP_AUTOMAT_HINTS.test(window),
+    });
   }
 
-  // Prefer door-eligible candidates first; fall back to non-pickup-only candidates.
-  const door = candidates.filter(c => c.doorScore && !c.pickupScore);
+  const door = candidates.filter(c => c.nearDoorHint && !c.nearPickupHint);
   if (door.length > 0) {
     out.cheapest = Math.min(...door.map(c => c.price));
     out.doorDelivery = true;
     return out;
   }
-  const ambiguous = candidates.filter(c => !c.pickupScore);
+  const ambiguous = candidates.filter(c => !c.nearPickupHint);
   if (ambiguous.length > 0) {
     out.cheapest = Math.min(...ambiguous.map(c => c.price));
     out.doorDelivery = false;
