@@ -1,6 +1,7 @@
 import type {Adapter} from '../lib/adapter.js';
 import {legacyAdapter} from './_legacy.js';
 import {aawee} from './aawee.js';
+import {arcis} from './arcis.js';
 import {asejaera} from './asejaera.js';
 import {asenurkka} from './asenurkka.js';
 import {asepajavuorela} from './asepajavuorela.js';
@@ -8,11 +9,14 @@ import {erahaijaa} from './erahaijaa.js';
 import {erakala} from './erakala.js';
 import {erakolmio} from './erakolmio.js';
 import {greentrail} from './greentrail.js';
+import {ironpoint} from './ironpoint.js';
 import {karkkainen} from './karkkainen.js';
 import {kurre} from './kurre.js';
 import {metsoase} from './metsoase.js';
 import {motonet} from './motonet.js';
+import {olkkonen} from './olkkonen.js';
 import {oulunase} from './oulunase.js';
+import {pyorapaja} from './pyorapaja.js';
 import {ruoto} from './ruoto.js';
 import {savonmutka} from './savonmutka.js';
 import {seponurheilujapatruuna} from './seponurheilujapatruuna.js';
@@ -36,6 +40,7 @@ import {verkkoaita} from './verkkoaita.js';
 export const adapters: Adapter[] = [
   // Adapters with discover() + delivery() implemented and URLs verified
   aawee,
+  arcis,
   asejaera,
   asenurkka,
   asepajavuorela,
@@ -43,11 +48,14 @@ export const adapters: Adapter[] = [
   erakala,
   erakolmio,
   greentrail,
+  ironpoint,
   karkkainen,
   kurre,
   metsoase,
   motonet,
+  olkkonen,
   oulunase,
+  pyorapaja,
   ruoto,
   savonmutka,
   seponurheilujapatruuna,
@@ -55,26 +63,21 @@ export const adapters: Adapter[] = [
   uittokalusto,
   verkkoaita,
 
-  // Legacy stubs — preserve current behavior. Replace each with a real
-  // adapter file as discovery/delivery support is added per retailer.
-  // Verify each retailer's category-page URL pattern by visiting the site
-  // before writing an adapter.
+  // Legacy stubs — preserve current behavior. Reasons each is still a stub
+  // are tracked in the PR description; replace with a real adapter once the
+  // underlying site issue is resolved.
   legacyAdapter('Ahtihuvila', 'https://www.ahtihuvila.fi'),
-  legacyAdapter('Arcis', 'https://www.arcis.fi'),
   legacyAdapter('Asejaosa', 'https://www.asejaosa.fi'),
   legacyAdapter('Asetalo', 'https://www.asetalo.fi'),
-  legacyAdapter('Iron Point', 'https://www.ironpoint.fi'),
   legacyAdapter('Riistamaa', 'https://www.riistamaa.fi'),
   legacyAdapter('Viranomainen', 'https://viranomainen.fi'),
 
-  // New retailers (legacy stubs until adapters land)
-  legacyAdapter('XXL', 'https://www.xxl.fi'),
+  // New-retailer stubs (no products yet, storefront structure unconfirmed)
   legacyAdapter('Commando', 'https://www.commando.fi'),
-  legacyAdapter('Olkkonen', 'https://www.olkkonen.fi'),
   legacyAdapter('Eräkellari', 'https://www.erakellari.fi'),
-  legacyAdapter('Ähtärin Ase', 'https://www.ahtarinase.fi'),
   legacyAdapter('Välineet Kuntoon', 'https://valineetkuntoon.fi'),
-  legacyAdapter('Pyörä-Paja', 'https://pyorapaja.fi'),
+  legacyAdapter('XXL', 'https://www.xxl.fi'),
+  legacyAdapter('Ähtärin Ase', 'https://www.ahtarinase.fi'),
 ];
 
 export function findAdapter(name: string): Adapter | undefined {
