@@ -1,12 +1,19 @@
 import type {Adapter} from '../lib/adapter.js';
 import {legacyAdapter} from './_legacy.js';
 import {aawee} from './aawee.js';
+import {asejaera} from './asejaera.js';
 import {asenurkka} from './asenurkka.js';
 import {asepajavuorela} from './asepajavuorela.js';
+import {erahaijaa} from './erahaijaa.js';
+import {erakala} from './erakala.js';
 import {erakolmio} from './erakolmio.js';
+import {greentrail} from './greentrail.js';
 import {karkkainen} from './karkkainen.js';
+import {kurre} from './kurre.js';
+import {metsoase} from './metsoase.js';
 import {motonet} from './motonet.js';
 import {oulunase} from './oulunase.js';
+import {ruoto} from './ruoto.js';
 import {savonmutka} from './savonmutka.js';
 import {seponurheilujapatruuna} from './seponurheilujapatruuna.js';
 import {sissos} from './sissos.js';
@@ -29,12 +36,19 @@ import {verkkoaita} from './verkkoaita.js';
 export const adapters: Adapter[] = [
   // Adapters with discover() + delivery() implemented and URLs verified
   aawee,
+  asejaera,
   asenurkka,
   asepajavuorela,
+  erahaijaa,
+  erakala,
   erakolmio,
+  greentrail,
   karkkainen,
+  kurre,
+  metsoase,
   motonet,
   oulunase,
+  ruoto,
   savonmutka,
   seponurheilujapatruuna,
   sissos,
@@ -47,17 +61,10 @@ export const adapters: Adapter[] = [
   // before writing an adapter.
   legacyAdapter('Ahtihuvila', 'https://www.ahtihuvila.fi'),
   legacyAdapter('Arcis', 'https://www.arcis.fi'),
-  legacyAdapter('Ase ja Erä', 'https://www.asejaera.fi'),
   legacyAdapter('Asejaosa', 'https://www.asejaosa.fi'),
   legacyAdapter('Asetalo', 'https://www.asetalo.fi'),
-  legacyAdapter('Era Haijaa', 'https://era.haijaa.fi'),
-  legacyAdapter('Erakala', 'https://www.erakala.fi'),
-  legacyAdapter('Greentrail', 'https://www.greentrail.fi'),
   legacyAdapter('Iron Point', 'https://www.ironpoint.fi'),
-  legacyAdapter('Kurre', 'https://www.kurre.fi'),
-  legacyAdapter('Metso Ase', 'https://www.metsoase.fi'),
   legacyAdapter('Riistamaa', 'https://www.riistamaa.fi'),
-  legacyAdapter('Ruoto', 'https://www.ruoto.fi'),
   legacyAdapter('Viranomainen', 'https://viranomainen.fi'),
 
   // New retailers (legacy stubs until adapters land)
