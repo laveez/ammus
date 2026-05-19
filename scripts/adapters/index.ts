@@ -1,9 +1,17 @@
 import type {Adapter} from '../lib/adapter.js';
 import {legacyAdapter} from './_legacy.js';
 import {aawee} from './aawee.js';
+import {asenurkka} from './asenurkka.js';
+import {asepajavuorela} from './asepajavuorela.js';
+import {erakolmio} from './erakolmio.js';
 import {karkkainen} from './karkkainen.js';
 import {motonet} from './motonet.js';
+import {oulunase} from './oulunase.js';
+import {savonmutka} from './savonmutka.js';
+import {seponurheilujapatruuna} from './seponurheilujapatruuna.js';
 import {sissos} from './sissos.js';
+import {uittokalusto} from './uittokalusto.js';
+import {verkkoaita} from './verkkoaita.js';
 
 /**
  * Registry of all known retailer adapters. Order has no semantic meaning —
@@ -21,9 +29,17 @@ import {sissos} from './sissos.js';
 export const adapters: Adapter[] = [
   // Adapters with discover() + delivery() implemented and URLs verified
   aawee,
+  asenurkka,
+  asepajavuorela,
+  erakolmio,
   karkkainen,
   motonet,
+  oulunase,
+  savonmutka,
+  seponurheilujapatruuna,
   sissos,
+  uittokalusto,
+  verkkoaita,
 
   // Legacy stubs — preserve current behavior. Replace each with a real
   // adapter file as discovery/delivery support is added per retailer.
@@ -33,26 +49,18 @@ export const adapters: Adapter[] = [
   legacyAdapter('Arcis', 'https://www.arcis.fi'),
   legacyAdapter('Ase ja Erä', 'https://www.asejaera.fi'),
   legacyAdapter('Asejaosa', 'https://www.asejaosa.fi'),
-  legacyAdapter('Asenurkka', 'https://asenurkka.fi'),
-  legacyAdapter('Asepaja Vuorela', 'https://www.asepajamvuorela.fi'),
   legacyAdapter('Asetalo', 'https://www.asetalo.fi'),
   legacyAdapter('Era Haijaa', 'https://era.haijaa.fi'),
   legacyAdapter('Erakala', 'https://www.erakala.fi'),
-  legacyAdapter('Erakolmio', 'https://www.erakolmio.com'),
   legacyAdapter('Greentrail', 'https://www.greentrail.fi'),
   legacyAdapter('Iron Point', 'https://www.ironpoint.fi'),
   legacyAdapter('Kurre', 'https://www.kurre.fi'),
   legacyAdapter('Metso Ase', 'https://www.metsoase.fi'),
-  legacyAdapter('Oulun Ase', 'https://www.oulunase.fi'),
   legacyAdapter('Riistamaa', 'https://www.riistamaa.fi'),
   legacyAdapter('Ruoto', 'https://www.ruoto.fi'),
-  legacyAdapter('Seponurheilujapatruuna', 'https://www.seponurheilujapatruuna.fi'),
-  legacyAdapter('Uittokalusto', 'https://www.uittokalusto.fi'),
   legacyAdapter('Viranomainen', 'https://viranomainen.fi'),
 
   // New retailers (legacy stubs until adapters land)
-  legacyAdapter('Savon Mutka', 'https://savonmutka.fi'),
-  legacyAdapter('Verkkoaita', 'https://verkkoaita.com'),
   legacyAdapter('XXL', 'https://www.xxl.fi'),
   legacyAdapter('Commando', 'https://www.commando.fi'),
   legacyAdapter('Olkkonen', 'https://www.olkkonen.fi'),
