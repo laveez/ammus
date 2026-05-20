@@ -1,0 +1,135 @@
+{
+  "Aawee": {
+    "baseUrl": "https://www.aawee.fi",
+    "shippingPageUrl": "https://www.aawee.fi/fi/toimitusehdot",
+    "delivery": null
+  },
+  "Ahtihuvila": {
+    "baseUrl": "https://www.ahtihuvila.fi",
+    "delivery": null
+  },
+  "Arcis": {
+    "baseUrl": "https://www.arcis.fi",
+    "delivery": null
+  },
+  "Ase ja Erä": {
+    "baseUrl": "https://www.asejaera.fi",
+    "delivery": null
+  },
+  "Asejaosa": {
+    "baseUrl": "https://www.asejaosa.fi",
+    "delivery": null
+  },
+  "Asenurkka": {
+    "baseUrl": "https://asenurkka.fi",
+    "delivery": null
+  },
+  "Asepaja Vuorela": {
+    "baseUrl": "https://www.asepajamvuorela.fi",
+    "delivery": null
+  },
+  "Asetalo": {
+    "baseUrl": "https://www.asetalo.fi",
+    "delivery": null
+  },
+  "Era Haijaa": {
+    "baseUrl": "https://era.haijaa.fi",
+    "delivery": null
+  },
+  "Erakala": {
+    "baseUrl": "https://www.erakala.fi",
+    "delivery": null
+  },
+  "Erakolmio": {
+    "baseUrl": "https://www.erakolmio.com",
+    "delivery": null
+  },
+  "Greentrail": {
+    "baseUrl": "https://www.greentrail.fi",
+    "delivery": null
+  },
+  "Iron Point": {
+    "baseUrl": "https://www.ironpoint.fi",
+    "delivery": null
+  },
+  "Kurre": {
+    "baseUrl": "https://www.kurre.fi",
+    "delivery": null
+  },
+  "Kärkkäinen": {
+    "baseUrl": "https://www.karkkainen.com",
+    "delivery": null
+  },
+  "Metso Ase": {
+    "baseUrl": "https://www.metsoase.fi",
+    "delivery": null
+  },
+  "Motonet": {
+    "baseUrl": "https://www.motonet.fi",
+    "delivery": null
+  },
+  "Oulun Ase": {
+    "baseUrl": "https://www.oulunase.fi",
+    "delivery": null
+  },
+  "Riistamaa": {
+    "baseUrl": "https://www.riistamaa.fi",
+    "delivery": null
+  },
+  "Ruoto": {
+    "baseUrl": "https://www.ruoto.fi",
+    "delivery": null
+  },
+  "Seponurheilujapatruuna": {
+    "baseUrl": "https://www.seponurheilujapatruuna.fi",
+    "delivery": null
+  },
+  "Sissos": {
+    "baseUrl": "https://www.sissos.fi",
+    "delivery": null
+  },
+  "Uittokalusto": {
+    "baseUrl": "https://www.uittokalusto.fi",
+    "delivery": null
+  },
+  "Viranomainen": {
+    "baseUrl": "https://viranomainen.fi",
+    "delivery": null
+  },
+  "Savon Mutka": {
+    "baseUrl": "https://savonmutka.fi",
+    "delivery": null
+  },
+  "Verkkoaita": {
+    "baseUrl": "https://verkkoaita.com",
+    "delivery": null
+  },
+  "XXL": {
+    "baseUrl": "https://www.xxl.fi",
+    "delivery": null
+  },
+  "Commando": {
+    "baseUrl": "https://www.commando.fi",
+    "delivery": null
+  },
+  "Olkkonen": {
+    "baseUrl": "https://www.olkkonen.fi",
+    "delivery": null
+  },
+  "Eräkellari": {
+    "baseUrl": "https://www.erakellari.fi",
+    "delivery": null
+  },
+  "Ähtärin Ase": {
+    "baseUrl": "https://www.ahtarinase.fi",
+    "delivery": null
+  },
+  "Välineet Kuntoon": {
+    "baseUrl": "https://valineetkuntoon.fi",
+    "delivery": null
+  },
+  "Pyörä-Paja": {
+    "baseUrl": "https://pyorapaja.fi",
+    "delivery": null
+  }
+}

@@ -1,7 +1,10 @@
 {
   "calibers": [
     "22 LR",
+    "222 Remington",
     "223 Remington",
+    "6.5 Creedmoor",
+    "30-06 Springfield",
     "308 Winchester",
     "7.62x39",
     "9mm"
@@ -1896,6 +1899,170 @@
         "pricePerRound": "0.825€",
         "total": "330.00€",
         "status": "Available"
+      }
+    ],
+    "222 Remington": [
+      {
+        "url": "https://www.karkkainen.com/en-en/sako-222-rem-3-2g-105g-fmj-20kpl-patruuna-1406619223290",
+        "retailer": "Kärkkäinen",
+        "productName": "Sako 222 Rem 3.2g 50gr FMJ",
+        "productDetails": "FMJ 3.2g",
+        "brand": "Sako",
+        "quantity": "20",
+        "pricePerRound": "1.250€",
+        "total": "24.99€",
+        "status": "Available",
+        "lastSeen": "2026-05-08"
+      },
+      {
+        "url": "https://www.karkkainen.com/verkkokauppa/norma-222-rem-4-0g-soft-point-20kpl-patruuna",
+        "retailer": "Kärkkäinen",
+        "productName": "Norma 222 Rem 4.0g Soft Point",
+        "productDetails": "SP 4.0g",
+        "brand": "Norma",
+        "quantity": "20",
+        "pricePerRound": "1.495€",
+        "total": "29.90€",
+        "status": "Available",
+        "lastSeen": "2026-05-08"
+      },
+      {
+        "url": "https://www.motonet.fi/tuote/sako-range-222-rem-32-g-50-kpl?product=55-20862",
+        "retailer": "Motonet",
+        "productName": "Sako Range 222 Rem 3.2g 50kpl",
+        "productDetails": "FMJ 3.2g",
+        "brand": "Sako",
+        "quantity": "50",
+        "pricePerRound": "0.998€",
+        "total": "49.90€",
+        "status": "Available",
+        "lastSeen": "2026-05-08"
+      }
+    ],
+    "30-06 Springfield": [
+      {
+        "url": "https://www.karkkainen.com/verkkokauppa/sellier-bellot-30-06-sprg-11-7g-fmj-50kpl-patruuna",
+        "retailer": "Kärkkäinen",
+        "productName": "Sellier & Bellot 30-06 Sprg 11.7g FMJ",
+        "productDetails": "FMJ 11.7g",
+        "brand": "Sellier & Bellot",
+        "quantity": "50",
+        "pricePerRound": "1.198€",
+        "total": "59.90€",
+        "status": "Available",
+        "lastSeen": "2026-05-08"
+      },
+      {
+        "url": "https://www.karkkainen.com/verkkokauppa/sako-30-06-14-3g-228a-hammerhead-20kpl-patruuna",
+        "retailer": "Kärkkäinen",
+        "productName": "Sako 30-06 14.3g Hammerhead",
+        "productDetails": "Hammerhead 14.3g",
+        "brand": "Sako",
+        "quantity": "20",
+        "pricePerRound": "2.495€",
+        "total": "49.90€",
+        "status": "Available",
+        "lastSeen": "2026-05-08"
+      },
+      {
+        "url": "https://www.karkkainen.com/verkkokauppa/sako-30-06-11-7g-256a-hammerhead-20kpl-patruuna",
+        "retailer": "Kärkkäinen",
+        "productName": "Sako 30-06 11.7g Hammerhead",
+        "productDetails": "Hammerhead 11.7g",
+        "brand": "Sako",
+        "quantity": "20",
+        "pricePerRound": "2.495€",
+        "total": "49.90€",
+        "status": "Available",
+        "lastSeen": "2026-05-08"
+      },
+      {
+        "url": "https://www.karkkainen.com/verkkokauppa/norma-30-06-jaktmatch-50kpl-patruuna",
+        "retailer": "Kärkkäinen",
+        "productName": "Norma 30-06 Jaktmatch 50kpl",
+        "productDetails": "SP",
+        "brand": "Norma",
+        "quantity": "50",
+        "pricePerRound": "1.998€",
+        "total": "99.90€",
+        "status": "Available",
+        "lastSeen": "2026-05-08"
+      },
+      {
+        "url": "https://www.karkkainen.com/verkkokauppa/norma-30-06-9-7-g-ecostrike-20-kpl-patruuna",
+        "retailer": "Kärkkäinen",
+        "productName": "Norma 30-06 9.7g EcoStrike 20kpl",
+        "productDetails": "EcoStrike 9.7g",
+        "brand": "Norma",
+        "quantity": "20",
+        "pricePerRound": "3.495€",
+        "total": "69.90€",
+        "status": "Available",
+        "nonToxic": true,
+        "lastSeen": "2026-05-08"
+      }
+    ],
+    "6.5 Creedmoor": [
+      {
+        "url": "https://www.karkkainen.com/en-en/sako-6-5-creedmoor-123h-10-1g-20kpl-patruuna",
+        "retailer": "Kärkkäinen",
+        "productName": "Sako 6.5 Creedmoor 123H 10.1g",
+        "productDetails": "SP 10.1g",
+        "brand": "Sako",
+        "quantity": "20",
+        "pricePerRound": "2.495€",
+        "total": "49.90€",
+        "status": "Available",
+        "lastSeen": "2026-05-08"
+      },
+      {
+        "url": "https://www.karkkainen.com/verkkokauppa/sako-6-5-creedmoor-range-128h-fmjbt-9-3-g-50-kpl-patruuna",
+        "retailer": "Kärkkäinen",
+        "productName": "Sako 6.5 Creedmoor Range 128H FMJBT 9.3g",
+        "productDetails": "FMJBT 9.3g",
+        "brand": "Sako",
+        "quantity": "50",
+        "pricePerRound": "1.998€",
+        "total": "99.90€",
+        "status": "Available",
+        "lastSeen": "2026-05-08"
+      },
+      {
+        "url": "https://www.karkkainen.com/verkkokauppa/norma-6-5-creedmoor-8-4-g-golden-target-hpbt-20-kpl-patruuna",
+        "retailer": "Kärkkäinen",
+        "productName": "Norma 6.5 Creedmoor Golden Target HPBT 8.4g",
+        "productDetails": "HPBT 8.4g",
+        "brand": "Norma",
+        "quantity": "20",
+        "pricePerRound": "2.495€",
+        "total": "49.90€",
+        "status": "Available",
+        "lastSeen": "2026-05-08"
+      },
+      {
+        "url": "https://www.karkkainen.com/verkkokauppa/norma-6-5-creedmoor-whitetail-9-1-g-20-kpl-patruuna",
+        "retailer": "Kärkkäinen",
+        "productName": "Norma 6.5 Creedmoor Whitetail 9.1g",
+        "productDetails": "SP 9.1g",
+        "brand": "Norma",
+        "quantity": "20",
+        "pricePerRound": "2.495€",
+        "total": "49.90€",
+        "status": "Available",
+        "lastSeen": "2026-05-08"
+      },
+      {
+        "url": "https://www.karkkainen.com/verkkokauppa/sako-6-5-creedmoor-powerhead-blade-657h-7-8-g-20-kpl-patruuna",
+        "retailer": "Kärkkäinen",
+        "productName": "Sako 6.5 Creedmoor Powerhead Blade 657H 7.8g",
+        "productDetails": "Powerhead Blade 7.8g",
+        "brand": "Sako",
+        "quantity": "20",
+        "pricePerRound": "3.495€",
+        "total": "69.90€",
+        "status": "Available",
+        "nonToxic": true,
+        "lastSeen": "2026-05-08"
       }
     ]
   }
